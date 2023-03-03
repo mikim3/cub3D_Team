@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:12:28 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/03 10:24:58 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/03 11:31:09 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,6 @@ void    cal_ray(t_god *god, t_dpable_ray *horz_or_vert, int x_adjust, int y_adju
 // 양옆으로 쭉 그어진 행모양 기준선
 // cal_ray함수에서 벽의위치를 찾는데 쓰일
 // xintercept, yintercept, xstep, ystep의 값을 정해줌
-
 void    cal_horz_ray(t_god *god, t_dpable_ray *horz)
 {
     horz->found_wallHit = FALSE;
