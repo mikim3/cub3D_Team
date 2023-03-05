@@ -12,31 +12,43 @@
 
 NAME		= cub3D
 
-SRCS		= main.c \
-			map.c \
-			player.c \
-			key.c \
-			render_master.c \
-			ray.c
+SRCS		=			\
+		main.c			\
+		map.c			\
+		player.c		\
+		key.c			\
+		render_master.c	\
+		ray.c
 
-OBJS		= $(SRCS:%.c=%.o)
-LIBC		= ar rcs
-FLAGS		= -Wall -Wextra -Werror
+OBJS_DIR	= objs
+OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+
+MLX			= mlx
+CFLAGS		= -Wall -Wextra -Werror
+LFLAGE 		= -L ./$(MLX) -l $(MLX)
+APIFLAGE	= -framework OpenGL -framework Appkit
+
+.PHONY		:	all clean fclean re bonus
 
 all			:	$(NAME)
 
-$(NAME)		:	$(OBJS)
-		cc -o $(NAME) $(OBJS) -L./mlx -lmlx -framework OpenGL -framework AppKit
+$(NAME)		:	$(OBJS_DIR) $(OBJS)
+		$(CC) $(LFLAGE) $(APIFLAGE) -o $(NAME) $(OBJS)
 
-%.o			:	%.c
-		cc $(FLAGS) -c $^ -I./ -o $@
+$(OBJS_DIR)	:
+	mkdir $(OBJS_DIR)
+
+$(OBJS_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(MLX):
+	make -c $(MLX)
 
 clean		:
-		rm -f $(OBJS)
+		rm -rf $(OBJS_DIR)
+		make clean -C $(MLX)
 
 fclean		:	clean
 		rm -f $(NAME)
 
 re			:	fclean all
-
-.PHONY		:	all clean fclean re bonus
