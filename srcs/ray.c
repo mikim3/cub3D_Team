@@ -54,14 +54,14 @@ void	ray_init(t_ray *ray, double rayAngle)
 void    draw_ray(t_god *god)
 {
     double angle;
-    double maxAngle;
+    // double maxAngle; //CFLAGS 때문에 주석처리
     int i;
 
     i = 0;
     //
     // god->player.rotationAngle 플레이어의 시야각은
     angle = god->player.rotationAngle - (RAY_RANGE / 2.0);
-    maxAngle = god->player.rotationAngle + (RAY_RANGE / 2.0);
+    // maxAngle = god->player.rotationAngle + (RAY_RANGE / 2.0);//CFLAGS 때문에 주석처리
 
     //(3D기준)화면상 왼쪽부터 오른쪽으로 쭉 그려진다.
     while (i < RAY_COUNT)

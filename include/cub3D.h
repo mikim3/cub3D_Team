@@ -20,7 +20,8 @@
 #define _USE_MATH_DEFINES //math.h안에 M_PI값을 쓸수 있게해주는 변수
 #include <math.h> // floor,
 #include <float.h> // DBL_MAX
-#include "./mlx/mlx.h"
+#include "mlx.h"
+#include "libft.h"
 
 // 1배율은 꽉참
 #define MINI_SCALE 1
