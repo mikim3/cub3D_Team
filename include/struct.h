@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef STRUCT_H
+# define STRUCT_H
+
 // t_god으로 합병됨
 // typedef struct	s_mlx
 // {
@@ -97,3 +100,5 @@ typedef struct s_god {
 	void	*mlx;
 	void	*win;
 } t_god;
+
+#endif

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 15:03:28 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 15:03:29 by soylee           ###   ########.fr       */
+/*   Created: 2023/03/12 15:16:07 by soylee            #+#    #+#             */
+/*   Updated: 2023/03/12 15:16:18 by soylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef PARSING_H
+# define PARSING_H
 
-int     print_error(char *msg);
-void    exit_error(char *msg);
-int     check_extension(char *filename);
-void    ft_free(char **str);
+# include <fcntl.h>
+#include "struct.h"
 
+void    read_file(t_god *god, char *filename);
+char    **read_map(int fd);
+void    parsing_map(t_god *god, char **str_map);
+void    get_map_info(t_map *map, char **str_map);
 #endif

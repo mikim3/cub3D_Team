@@ -25,6 +25,7 @@
 
 #include "struct.h"
 #include "utils.h"
+#include "parsing.h"
 
 // 1배율은 꽉참
 #define MINI_SCALE 1
@@ -118,7 +119,7 @@ int        key_press(int keycode, t_key *key);
 int        key_release(int keycode, t_key *key);
 int		key_exit(void);
 
-int		is_wall(double x, double y);
+int		is_wall(t_map *map, double x, double y);
 // int		check_edge(t_god *god, double x1, double x2, double y1, double y2);
 
 /* ray.c */

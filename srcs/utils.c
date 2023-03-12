@@ -30,7 +30,21 @@ int check_extension(char *filename)
     size_t  idx;
 
     idx = ft_strlen(filename) - 4;
-    if (ft_strncmp(filename + idx, ".cub", 5) == 0)
+    if (ft_strncmp(filename + idx, ".cub", 4) == 0)
         return TRUE;
     return FALSE;
+}
+
+void    ft_free(char **str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        free(str[i]);
+        str[i] = NULL;
+        i++;
+    }
+    free(str);
 }

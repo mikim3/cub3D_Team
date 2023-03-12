@@ -42,6 +42,7 @@ int		main(int ac, char **av)
 		return (print_error("Input a map's file name."));
 	if (!check_extension(av[1]))
 		return (print_error("Input the \".cub\" extension file."));
+	read_file(&god, av[1]);
 	main_init(&god);
 	// mlx.mlx = mlx_init();
 	// mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "title");

@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 15:03:28 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 15:03:29 by soylee           ###   ########.fr       */
+/*   Created: 2023/03/12 16:22:28 by soylee            #+#    #+#             */
+/*   Updated: 2023/03/12 16:22:40 by soylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "cub3d.h"
 
-int     print_error(char *msg);
-void    exit_error(char *msg);
-int     check_extension(char *filename);
-void    ft_free(char **str);
+// void    check_map(char **str_map)
+// {
 
-#endif
+// }
+
+// void    check_invalid_char

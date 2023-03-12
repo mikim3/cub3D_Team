@@ -96,7 +96,7 @@ int	update_player(t_god *god)
 
 	// (14) 보고 !check_edge(god, &p1, &p2) && 추가할지 고민하기
 	// 벽이면 이동 불가
-	if (!is_wall(newPlayerX, newPlayerY))
+	if (!is_wall(&(god->map), newPlayerX, newPlayerY))
 	{
 		//벽아니면 현재좌표를 이동
 		god->player.x = newPlayerX;

@@ -105,9 +105,13 @@ void	render_map(t_god *god)
 		col = 0;
 		while (col < MAP_NUM_COLS)
 		{
-			if (mini_map[row][col] == 1)
+			// if (mini_map[row][col] == 1)
+			// 	fill_squares(&god->img, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), 0x000000);
+			// else
+			// 	fill_squares(&god->img, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), 0xffffff);
+			if (god->map.map_matrix[row][col] == 1)
 				fill_squares(&god->img, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), 0x000000);
-			else
+			else if (god->map.map_matrix[row][col] == 0)
 				fill_squares(&god->img, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), 0xffffff);
 			col++;
 		}
@@ -115,12 +119,12 @@ void	render_map(t_god *god)
 	}
 }
 
-int	is_wall(double x, double y)
+int	is_wall(t_map *map, double x, double y)
 {
 	int xX;
 	int yY;
 
-	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+	if (x < 0 || x > map->map_cols * TILE_SIZE || y < 0 || y > map->map_rows * TILE_SIZE)
 	{
 		return (1);
 	}
@@ -128,7 +132,7 @@ int	is_wall(double x, double y)
 	xX = floor(x / TILE_SIZE);
 	yY = floor(y / TILE_SIZE);
 
-	return mini_map[yY][xX] != 0;
+	return map->map_matrix[yY][xX] != 0;
 }
 
 // (14)
