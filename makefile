@@ -20,7 +20,8 @@ SRCS		=			\
 		player.c		\
 		key.c			\
 		render_master.c	\
-		ray.c
+		ray.c			\
+		utils.c
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

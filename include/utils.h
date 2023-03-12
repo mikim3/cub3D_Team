@@ -1,36 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 15:01:12 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 15:01:13 by soylee           ###   ########.fr       */
+/*   Created: 2023/03/12 15:03:28 by soylee            #+#    #+#             */
+/*   Updated: 2023/03/12 15:03:29 by soylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
-
-int print_error(char *msg)
-{
-    ft_putstr_fd("Error: ", STDERR_FILENO);
-    ft_putendl_fd(msg, STDERR_FILENO);
-    return (1);
-}
-
-void    exit_error(char *msg)
-{
-    print_error(msg);
-    exit(1);
-}
-
-int check_extension(char *filename)
-{
-    size_t  idx;
-
-    idx = ft_strlen(filename) - 4;
-    if (ft_strncmp(filename + idx, ".cub", 5) == 0)
-        return TRUE;
-    return FALSE;
-}
+int     print_error(char *msg);
+void    exit_error(char *msg);
+int     check_extension(char *filename);

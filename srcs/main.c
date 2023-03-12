@@ -31,13 +31,17 @@ static void main_init(t_god *god)
 			&(god->img.line_size), &(god->img.endian));
 }
 
-int		main(void)
+int		main(int ac, char **av)
 {
 	// t_mlx	mlx;
 	// t_img	map;
 	// t_img 	player;
 	t_god	god; // player, map, t_mlx 등을 합합친  변변수수
 
+	if (ac != 2)
+		return (print_error("Input a map's file name."));
+	if (!check_extension(av[1]))
+		return (print_error("Input the \".cub\" extension file."));
 	main_init(&god);
 	// mlx.mlx = mlx_init();
 	// mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "title");
