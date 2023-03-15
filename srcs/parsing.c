@@ -15,22 +15,19 @@
 void    read_file(t_god *god, char *filename)
 {
     int     fd;
-    char    **str_map;
 
     fd = open(filename, O_RDONLY);
     if (fd == -1)
         exit_error("Fail to open file.");
-    str_map = read_map(fd);
-    if (!str_map)
-        exit_error("Fail to split map.");
-    parsing_map(god, str_map);
+    read_map(god, fd);
 }
 
-char    **read_map(int fd)
+void    read_map(t_god *god, int fd)
 {
     char    *line;
     char    *gnl_tmp;
     char    *join_tmp;
+    char    **str_map;
 
     line = ft_strdup("");
     while (1)
@@ -43,7 +40,10 @@ char    **read_map(int fd)
         free(gnl_tmp);
         line = join_tmp;
     }
-    return (ft_split(line, '\n'));
+    str_map = ft_split(line, '\n');
+    if (!str_map)
+        exit_error("Fail to split map.");
+    parsing_map(god, str_map);
 }
 
 void    parsing_map(t_god *god, char **str_map)
@@ -97,4 +97,6 @@ void    get_map_info(t_map *map, char **str_map)
         exit_error("There is no map.");
     map->map_cols = max;
     map->map_rows = i;
+    map->window_width = map->map_cols * TILE_SIZE;
+    map->window_height = map->map_rows * TILE_SIZE;
 }

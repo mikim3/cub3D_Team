@@ -37,10 +37,10 @@ int     ft_loop(t_god *god)
 //미니맵을 제제외외한  범범위위인  3D를 표현할 범위를 특정색으로 초기화한다.
 void fill_3D_color(t_god *god)
 {
-	for (int y = 0; y < WINDOW_HEIGHT; y++)
+	for (int y = 0; y < god->map.window_height; y++)
 	{
- 	   for (int x = 0; x < WINDOW_WIDTH; x++)
-    	    god->img.data[WINDOW_WIDTH * y + x] = IS_3D_WALL;
+ 	   for (int x = 0; x < god->map.window_width; x++)
+    	    god->img.data[god->map.window_width * y + x] = IS_3D_WALL;
 	}
 }
 
@@ -49,10 +49,10 @@ void render_player(t_god *god)
     draw_player(god,&(god->player),&god->img);
 }
 
-void player_init(t_player *player)
+void player_init(t_player *player, t_map *map)
 {
-	player->x = WINDOW_WIDTH / 2;
-	player->y = WINDOW_HEIGHT / 2;
+	player->x = map->window_width / 2;
+	player->y = map->window_height / 2;
 	player->thickness = PLAYER_THICKNESS;
 	player->rotationAngle = M_PI / 2; // 0도가 오른쪽 90도면 아래
 	player->walkSpeed = 1;
@@ -75,30 +75,30 @@ void render_3D_project_walls(t_god *god, int ray_num)
 	if (god->ray.distance == 0)
     	god->ray.distance = 0.01;
 	double correct_distance = god->ray.distance * cos(god->ray.ray_angle - god->player.rotationAngle);
-    double distance_project_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
+    double distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
 	double projected_wall_height = (TILE_SIZE / correct_distance) * distance_project_plane;
 
     int wallStripHeight = (int)projected_wall_height;
 
-    int wall_top_pixel = (WINDOW_HEIGHT / 2) - (wallStripHeight / 2) - god->player.updown_sight;
+    int wall_top_pixel = (god->map.window_height / 2) - (wallStripHeight / 2) - god->player.updown_sight;
     wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel - god->player.updown_sight;
 
-    int wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (wallStripHeight / 2);
-    wall_bottom_pixel = wall_bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wall_bottom_pixel;
+    int wall_bottom_pixel = (god->map.window_height / 2) + (wallStripHeight / 2);
+    wall_bottom_pixel = wall_bottom_pixel > god->map.window_height ? god->map.window_height : wall_bottom_pixel;
 
     int color = god->ray.wasHit_vertical ? VERT_WALL_COLOR : HORI_WALL_COLOR;
 
     for (int y = wall_top_pixel; y < wall_bottom_pixel; y++)
         for (int x = 0; x < WALL_STRIP_WIDTH; x++)
-            if (god->img.data[WINDOW_WIDTH * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_WALL)
-                god->img.data[WINDOW_WIDTH * y + (x + ray_num * WALL_STRIP_WIDTH)] = color;
+            if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_WALL)
+                god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = color;
 	draw_floor(god, ray_num, wall_bottom_pixel, FLOOR_COLOR);
 	draw_sky(god, ray_num, wall_top_pixel, SKY_COLOR);
 }
 
 void	render_master(t_god *god)
 {
-    player_init(&(god->player)); // 사용자 위치 초기화
+    player_init(&(god->player), &god->map); // 사용자 위치 초기화
 
 	//키누를 때 어떤 함수를 사용할지 결정
 	mlx_hook(god->win, X_EVENT_KEY_PRESS, (1L << 0), &key_press, &(god->key));

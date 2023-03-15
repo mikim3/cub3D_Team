@@ -31,10 +31,10 @@
 #define MINI_SCALE 1
 #define TILE_SIZE 40
 // 맵의 행 크기, 파싱을 받을 경우 그 맵의 크기를 구구해해서  ak만들어 줘야 된다.
-#define MAP_NUM_ROWS 12
-#define MAP_NUM_COLS 20
-#define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
-#define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
+// #define MAP_NUM_ROWS 12
+// #define MAP_NUM_COLS 20
+// #define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
+// #define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
 /* key event */
 # define X_EVENT_KEY_PRESS			2
@@ -93,7 +93,7 @@
 
 # define UPDOWNSPEED		(3)
 
-void	fill_squares(t_img *map, int x, int y, int color);
+void	fill_squares(t_img *img, t_map *map, int x, int y, int color);
 
 /* render */
 void	render_master(t_god *god); //모든 렌더링을 수행해주는 함수
@@ -105,10 +105,10 @@ void	render_3D_project_walls(t_god *god, int ray_num);
 
 
 
-void    setting_map_location(int *x, int *y, int x2, int y2);
+void    setting_map_location(t_map *map, int *x, int *y, int x2, int y2);
 
 /* player */
-void player_init(t_player *player);
+void player_init(t_player *player, t_map *map);
 // int    draw_player(t_mlx *mlx, t_player *player, t_img *map);
 // int    draw_player(t_god *god);
 int    draw_player(t_god *god, t_player *player, t_img *img);

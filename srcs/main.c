@@ -16,7 +16,7 @@
 static void main_init(t_god *god)
 {
 	god->mlx = mlx_init();
-	god->win = mlx_new_window(god->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "title");
+	god->win = mlx_new_window(god->mlx, god->map.window_width, god->map.window_height, "title");
 	// god->img.ptr = mlx_new_image(god->mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
     // player.img = mlx_new_image(god->mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
 
@@ -26,7 +26,7 @@ static void main_init(t_god *god)
 
 	key_init(&(god->key));
 	//god
-	god->img.ptr = mlx_new_image(god->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	god->img.ptr = mlx_new_image(god->mlx, god->map.window_width, god->map.window_height);
 	god->img.data = (int *)mlx_get_data_addr(god->img.ptr, &(god->img.bpp),
 			&(god->img.line_size), &(god->img.endian));
 }

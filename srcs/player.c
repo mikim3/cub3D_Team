@@ -34,14 +34,14 @@ int    draw_player(t_god *god, t_player *player, t_img *img)
     int x;
     int y;
 
-    setting_map_location(&x, &y, player->x, player->y);
+    setting_map_location(&(god->map), &x, &y, player->x, player->y);
     update_player(god);
     // 플레이어 중앙점을 중심으로 그림
 	for (int row = -(player->thickness) / 2; row <= (player->thickness) / 2; row++)
     {
         for (int col = -(player->thickness) / 2; col <= (player->thickness) / 2; col++)
         {
-            img->data[WINDOW_WIDTH * (y + row) + (x + col)] = PLAYER_2D_COLOR;
+            img->data[god->map.window_width * (y + row) + (x + col)] = PLAYER_2D_COLOR;
         }
     }
     return (0);
@@ -106,10 +106,10 @@ int	update_player(t_god *god)
 	// 시야 이동
 	god->player.updown_sight += UPDOWNSPEED * god->key.updown_sight;
 	// 시야이동 리미트
-	if (god->player.updown_sight > WINDOW_HEIGHT / 5)
-		god->player.updown_sight = WINDOW_HEIGHT / 5;
-	if (god->player.updown_sight < - WINDOW_HEIGHT / 5)
-		god->player.updown_sight = - WINDOW_HEIGHT / 5;
+	if (god->player.updown_sight > god->map.window_height / 5)
+		god->player.updown_sight = god->map.window_height / 5;
+	if (god->player.updown_sight < - god->map.window_height / 5)
+		god->player.updown_sight = - god->map.window_height / 5;
 
 	return (0);
 }

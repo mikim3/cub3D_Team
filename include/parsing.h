@@ -17,7 +17,7 @@
 #include "struct.h"
 
 void    read_file(t_god *god, char *filename);
-char    **read_map(int fd);
+void    read_map(t_god *god, int fd);
 void    parsing_map(t_god *god, char **str_map);
 void    get_map_info(t_map *map, char **str_map);
 #endif
