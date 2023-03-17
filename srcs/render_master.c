@@ -49,16 +49,35 @@ void render_player(t_god *god)
     draw_player(god,&(god->player),&god->img);
 }
 
-void player_init(t_player *player, t_map *map)
+// void player_init(t_player *player, t_map *map)
+// {
+// 	player->x = map->window_width / 2;
+// 	player->y = map->window_height / 2;
+// 	player->thickness = PLAYER_THICKNESS;
+// 	player->rotationAngle = M_PI / 2; // 0도가 오른쪽 90도면 아래
+// 	player->walkSpeed = 1;
+// 	player->turnSpeed = 1.5 * (M_PI / 180); //
+// 	player->updown_sight = 0; // 0으로해도 될까??
+// }
+void player_init(t_player *player, double x, double y, char direction)
 {
-	player->x = map->window_width / 2;
-	player->y = map->window_height / 2;
+	player->x = (x + 0.5) * TILE_SIZE;
+	player->y = (y + 0.5) * TILE_SIZE;
 	player->thickness = PLAYER_THICKNESS;
-	player->rotationAngle = M_PI / 2; // 0도가 오른쪽 90도면 아래
+	// 0도가 오른쪽 90도면 아래
+	if (direction == 'N') //위
+		player->rotationAngle = M_PI * 1.5;
+	else if (direction == 'E') //오른쪽
+		player->rotationAngle = 0;
+	else if (direction == 'W') //왼쪽
+		player->rotationAngle = M_PI;
+	else //아래
+		player->rotationAngle = M_PI * 0.5;
 	player->walkSpeed = 1;
 	player->turnSpeed = 1.5 * (M_PI / 180); //
 	player->updown_sight = 0; // 0으로해도 될까??
 }
+
 
 // 3D 구역을 그리는 함수
 // 거리와 반비례하며 distance_project_plane을 곱하여 적절한 높이를 가지게 만들수 있다.
@@ -98,7 +117,7 @@ void render_3D_project_walls(t_god *god, int ray_num)
 
 void	render_master(t_god *god)
 {
-    player_init(&(god->player), &god->map); // 사용자 위치 초기화
+    // player_init(&(god->player), &god->map); // 사용자 위치 초기화
 
 	//키누를 때 어떤 함수를 사용할지 결정
 	mlx_hook(god->win, X_EVENT_KEY_PRESS, (1L << 0), &key_press, &(god->key));

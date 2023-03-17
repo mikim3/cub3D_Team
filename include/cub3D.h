@@ -83,7 +83,7 @@
 # define IS_3D_WALL			(0x663333)
 # define VIRTICAL_COLOR		(0x00FF00)
 # define HORIZON_COLOR		(0x0000FF)
-# define PLAYER_2D_COLOR	(0x000088)
+# define PLAYER_2D_COLOR	(0xFFFF00)
 # define SKY_COLOR			(0x444444)
 # define FLOOR_COLOR		(0x000000)
 # define RAY_COLOR			(0xFF0000)
@@ -108,7 +108,8 @@ void	render_3D_project_walls(t_god *god, int ray_num);
 void    setting_map_location(t_map *map, int *x, int *y, int x2, int y2);
 
 /* player */
-void player_init(t_player *player, t_map *map);
+// void player_init(t_player *player, t_map *map);
+void player_init(t_player *player, double x, double y, char direction);
 // int    draw_player(t_mlx *mlx, t_player *player, t_img *map);
 // int    draw_player(t_god *god);
 int    draw_player(t_god *god, t_player *player, t_img *img);

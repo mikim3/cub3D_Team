@@ -31,8 +31,14 @@ static void main_init(t_god *god)
 			&(god->img.line_size), &(god->img.endian));
 }
 
+void do_exit(void)
+{
+	system("leaks -q cub3D");
+}
+
 int		main(int ac, char **av)
 {
+	atexit(do_exit);
 	// t_mlx	mlx;
 	// t_img	map;
 	// t_img 	player;
@@ -53,6 +59,9 @@ int		main(int ac, char **av)
     // render_player(&god);
 	render_master(&god);
 	mlx_loop(god.mlx);
-
+	for (int i = 0; i < god.map.map_cols; i++)
+		free(god.map.map_matrix[i]);
+	free(god.map.map_matrix);
+	mlx_destroy_window(god.mlx, god.win);
 	return (0);
 }

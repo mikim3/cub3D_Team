@@ -20,6 +20,7 @@ void    read_file(t_god *god, char *filename)
     if (fd == -1)
         exit_error("Fail to open file.");
     read_map(god, fd);
+    close(fd);
 }
 
 void    read_map(t_god *god, int fd)
@@ -43,7 +44,13 @@ void    read_map(t_god *god, int fd)
     str_map = ft_split(line, '\n');
     if (!str_map)
         exit_error("Fail to split map.");
+    free(line);
+    check_valid_char(god, str_map);
     parsing_map(god, str_map);
+    check_around_wall(&god->map);
+    for(int i = 0; str_map[i]; i++)
+        free(str_map[i]);
+    free(str_map);
 }
 
 void    parsing_map(t_god *god, char **str_map)

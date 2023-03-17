@@ -88,11 +88,11 @@ int	update_player(t_god *god)
 	newPlayerX = god->player.x + moveStep * cos(god->player.rotationAngle - moveside);
 	newPlayerY = god->player.y + moveStep * sin(god->player.rotationAngle - moveside);
 
-	printf("key left == %d  key right == %d key up == %d key down == %d \n",god->key.left,god->key.right,god->key.up,god->key.down);
-	printf("moveStep == %d newPlayerX == %f newPlayerY == %f\n",moveStep, newPlayerX, newPlayerY);
-	printf("cos rotationAngle == %f sin rotationAngle %f\n",cos(god->player.rotationAngle), sin(god->player.rotationAngle));
-	printf("rotationAngle == %f \n",god->player.rotationAngle);
-	printf("walkDirection %f \n",walkDirection);
+	// printf("key left == %d  key right == %d key up == %d key down == %d \n",god->key.left,god->key.right,god->key.up,god->key.down);
+	// printf("moveStep == %d newPlayerX == %f newPlayerY == %f\n",moveStep, newPlayerX, newPlayerY);
+	// printf("cos rotationAngle == %f sin rotationAngle %f\n",cos(god->player.rotationAngle), sin(god->player.rotationAngle));
+	// printf("rotationAngle == %f \n",god->player.rotationAngle);
+	// printf("walkDirection %f \n",walkDirection);
 
 	// (14) 보고 !check_edge(god, &p1, &p2) && 추가할지 고민하기
 	// 벽이면 이동 불가
