@@ -172,7 +172,8 @@ int draw_sky(t_god *god, int ray_num, int wall_top_pixel, int color)
             if (god->img.data[god->map.window_width * y + \
 				(x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_WALL)
                 god->img.data[god->map.window_width * y + \
-				(x + ray_num * WALL_STRIP_WIDTH)] = color;
+				(x + ray_num * WALL_STRIP_WIDTH)] = god->map.sky_color;
+	(void)color;
     return (0);
 }
 
@@ -181,8 +182,9 @@ int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel, int color)
     for (int y = wall_bottom_pixel; y < god->map.window_height; y++)
         for (int x = 0; x < WALL_STRIP_WIDTH; x++)
             if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_WALL)
-                god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = color;
-    return (0);
+                god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = god->map.floor_color;
+	(void)color;
+	return (0);
 }
 
 

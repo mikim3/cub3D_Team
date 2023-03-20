@@ -15,7 +15,7 @@
 
 static void main_init(t_god *god)
 {
-	god->mlx = mlx_init();
+	// god->mlx = mlx_init();
 	god->win = mlx_new_window(god->mlx, god->map.window_width, god->map.window_height, "title");
 	// god->img.ptr = mlx_new_image(god->mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
     // player.img = mlx_new_image(god->mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
@@ -48,6 +48,7 @@ int		main(int ac, char **av)
 		return (print_error("Input a map's file name."));
 	if (!check_extension(av[1]))
 		return (print_error("Input the \".cub\" extension file."));
+	god.mlx = mlx_init();
 	read_file(&god, av[1]);
 	main_init(&god);
 	// mlx.mlx = mlx_init();
@@ -65,3 +66,15 @@ int		main(int ac, char **av)
 	mlx_destroy_window(god.mlx, god.win);
 	return (0);
 }
+
+// int main()
+// {
+// 	void *mlx = mlx_init();
+// 	// void *win = mlx_new_window(mlx, 64, 64, "mlx_title");
+// 	// void *img = mlx_new_image(mlx, 64, 64);
+// 	int w, h;
+// 	void *texture = mlx_xpm_file_to_image(mlx, "./asset/CRATE_2A.xpm", &w, &h);
+// 	if (!texture)
+// 		printf("ERROR\n");
+	
+// }

@@ -50,6 +50,8 @@ typedef struct s_map
 	int		window_height;
 	int		ray_count;//화면을 꽉채울 적절한 광선의 갯수 계산해서 넣기
 	char	**map_matrix;//
+	int		floor_color;
+	int		sky_color;
 }				t_map;
 
 typedef struct s_key
@@ -91,12 +93,25 @@ typedef struct s_ray {
     int     isRay_facingLeft;
 } t_ray;
 
+typedef struct s_texture
+{
+	int		width;
+	int		height;
+	void	*texture;
+}	t_texture;
+
+typedef enum e_info
+{
+    NO, SO, WE, EA, F, C
+} t_info;
+
 typedef struct s_god {
 	t_player player;
 	t_img	img;
 	t_key	key;
 	t_ray	ray;//광선
-	t_map	map;//파싱을 받으면 넣은 맵 구조체 파싱할 사람이 바꿔도 됨
+	t_map	map;
+	t_texture	texture[6];
 	void	*mlx;
 	void	*win;
 } t_god;

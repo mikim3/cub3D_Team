@@ -19,8 +19,105 @@ void    read_file(t_god *god, char *filename)
     fd = open(filename, O_RDONLY);
     if (fd == -1)
         exit_error("Fail to open file.");
+    read_info(god, fd);
     read_map(god, fd);
     close(fd);
+}
+
+void    read_info(t_god *god, int fd)
+{
+    char    *line;
+    int     cnt;
+
+    cnt = 0;
+    while (cnt < 6)
+    {
+        line = get_next_line(fd);
+        if (!line)
+            exit_error("read_info");
+        if (ft_strlen(line) == 0)
+            continue ;
+        check_type(god, line);
+        free(line);
+        cnt++;
+    }
+}
+
+void    check_type(t_god *god, char * line)
+{
+    static char *type[6] = {"NO ", "SO ", "WE ", "EA ", "F ", "C "};
+    static int  checked[6];
+    int         i;
+
+    i = 0;
+    while (i < 6)
+    {
+        if (ft_strlen(type[i]) == 3 && ft_strncmp(line, type[i], 3) == 0)
+        {
+            if (checked[i])
+                exit_error("Duplicated type");
+            parse_texture(god, line + 3, i);
+            checked[i] = 1;
+            return ;
+        }
+        else if (ft_strlen(type[i]) == 2 && ft_strncmp(line, type[i], 2) == 0)
+        {
+            if (checked[i])
+                exit_error("Duplicated type");
+            parse_color(god, line + 2, i);
+            checked[i] = 1;
+            return ;
+        }
+        i++;
+    }
+    exit_error("Mismatch type");
+}
+
+void    parse_texture(t_god *god, char *filename, int type)
+{
+    // (void)god; (void)filename; (void)type;
+    char*  nl = ft_strrchr(filename, '\n');
+    *nl = 0;
+    god->texture[type].width = 0;god->texture[type].height = 0;
+    god->texture[type].texture = mlx_xpm_file_to_image(god->mlx, filename, &god->texture[type].width, &god->texture[type].height);
+    if (!god->texture[type].texture)
+        exit_error("FAIL to Load Texture");
+}
+
+void    parse_color(t_god *god, char *line, int type)
+{
+    int color;
+    char **str_num;
+    int    num;
+
+    line[ft_strlen(line) - 1] = 0;
+    str_num = ft_split(line, ',');
+    if (!str_num)
+        exit_error("ft_split");
+    color = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        if (!str_num[i])
+            exit_error("lack of color");
+        color <<= 8;
+        num = ft_atoi(str_num[i]);
+        if (num == 0 && ft_strncmp(str_num[i], "0", 1))
+            exit_error("non-digit");
+        color |= num;
+    }
+    if (type == F)
+    {
+        god->map.floor_color = color;
+    }
+    else if (type == C)
+    {
+        god->map.sky_color = color;
+    }
+    else
+        exit_error("type_error");
+    for (int i = 0; str_num[i]; i++)
+        free(str_num[i]);
+    free(str_num);
 }
 
 void    read_map(t_god *god, int fd)

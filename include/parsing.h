@@ -14,7 +14,7 @@
 # define PARSING_H
 
 # include <fcntl.h>
-#include "struct.h"
+# include "struct.h"
 
 void    read_file(t_god *god, char *filename);
 void    read_map(t_god *god, int fd);
@@ -23,4 +23,10 @@ void    get_map_info(t_map *map, char **str_map);
 void    check_valid_char(t_god *god, char **str);
 void    check_around_wall(t_map *map);
 void    check_space_pos(t_map *map, int r, int c);
+
+void    read_info(t_god *god, int fd);
+void    check_type(t_god *god, char * line);
+void    parse_texture(t_god *god, char *line, int type);
+void    parse_color(t_god *god, char *line, int type);
+
 #endif
