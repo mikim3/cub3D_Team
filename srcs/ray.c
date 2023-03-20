@@ -146,10 +146,10 @@ void    draw_line(t_god *god, double dx, double dy)
     dy /= max_value;
     while (1)
     {
-        if (!is_wall(ray_x, ray_y))
+        if (!is_wall(&(god->map), ray_x, ray_y))
         {
-            setting_map_location(&x, &y, ray_x, ray_y);
-            god->img.data[WINDOW_WIDTH * y + x] = RAY_COLOR;
+            setting_map_location(&(god->map), &x, &y, ray_x, ray_y);
+            god->img.data[god->map.window_width * y + x] = RAY_COLOR;
         }
         else
             break;
@@ -260,9 +260,9 @@ void    cal_ray(t_god *god, t_dpable_ray *horz_or_vert, int x_adjust, int y_adju
     next_touchX = horz_or_vert->xintercept;
     next_touchY = horz_or_vert->yintercept;
 
-    while (next_touchX >= 0 && next_touchX <= WINDOW_WIDTH && next_touchY >= 0 && next_touchY <= WINDOW_HEIGHT)
+    while (next_touchX >= 0 && next_touchX <= god->map.window_width && next_touchY >= 0 && next_touchY <= god->map.window_height)
     {
-        if (is_wall(next_touchX + x_adjust, next_touchY + y_adjust))
+        if (is_wall(&(god->map), next_touchX + x_adjust, next_touchY + y_adjust))
         {
             horz_or_vert->found_wallHit = TRUE;
             horz_or_vert->wall_hitX = next_touchX;

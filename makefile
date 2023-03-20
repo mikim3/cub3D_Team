@@ -20,7 +20,10 @@ SRCS		=			\
 		player.c		\
 		key.c			\
 		render_master.c	\
-		ray.c
+		ray.c			\
+		utils.c			\
+		parsing.c		\
+		check_map.c
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
@@ -31,7 +34,7 @@ LIBFT_DIR	= libft
 LIBFT		= libft.a
 LIBS		= -L $(MLX_DIR) -l mlx -L $(LIBFT_DIR) -l ft
 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 IFLAGS		= -I $(INC) -I $(MLX_DIR) -I $(LIBFT_DIR)/$(INC)
 APIFLAGE	= -framework OpenGL -framework Appkit
 

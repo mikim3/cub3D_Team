@@ -34,14 +34,14 @@ int    draw_player(t_god *god, t_player *player, t_img *img)
     int x;
     int y;
 
-    setting_map_location(&x, &y, player->x, player->y);
+    setting_map_location(&(god->map), &x, &y, player->x, player->y);
     update_player(god);
     // 플레이어 중앙점을 중심으로 그림
 	for (int row = -(player->thickness) / 2; row <= (player->thickness) / 2; row++)
     {
         for (int col = -(player->thickness) / 2; col <= (player->thickness) / 2; col++)
         {
-            img->data[WINDOW_WIDTH * (y + row) + (x + col)] = PLAYER_2D_COLOR;
+            img->data[god->map.window_width * (y + row) + (x + col)] = PLAYER_2D_COLOR;
         }
     }
     return (0);
@@ -88,15 +88,15 @@ int	update_player(t_god *god)
 	newPlayerX = god->player.x + moveStep * cos(god->player.rotationAngle - moveside);
 	newPlayerY = god->player.y + moveStep * sin(god->player.rotationAngle - moveside);
 
-	printf("key left == %d  key right == %d key up == %d key down == %d \n",god->key.left,god->key.right,god->key.up,god->key.down);
-	printf("moveStep == %d newPlayerX == %f newPlayerY == %f\n",moveStep, newPlayerX, newPlayerY);
-	printf("cos rotationAngle == %f sin rotationAngle %f\n",cos(god->player.rotationAngle), sin(god->player.rotationAngle));
-	printf("rotationAngle == %f \n",god->player.rotationAngle);
-	printf("walkDirection %f \n",walkDirection);
+	// printf("key left == %d  key right == %d key up == %d key down == %d \n",god->key.left,god->key.right,god->key.up,god->key.down);
+	// printf("moveStep == %d newPlayerX == %f newPlayerY == %f\n",moveStep, newPlayerX, newPlayerY);
+	// printf("cos rotationAngle == %f sin rotationAngle %f\n",cos(god->player.rotationAngle), sin(god->player.rotationAngle));
+	// printf("rotationAngle == %f \n",god->player.rotationAngle);
+	// printf("walkDirection %f \n",walkDirection);
 
 	// (14) 보고 !check_edge(god, &p1, &p2) && 추가할지 고민하기
 	// 벽이면 이동 불가
-	if (!is_wall(newPlayerX, newPlayerY))
+	if (!is_wall(&(god->map), newPlayerX, newPlayerY))
 	{
 		//벽아니면 현재좌표를 이동
 		god->player.x = newPlayerX;
@@ -106,10 +106,10 @@ int	update_player(t_god *god)
 	// 시야 이동
 	god->player.updown_sight += UPDOWNSPEED * god->key.updown_sight;
 	// 시야이동 리미트
-	if (god->player.updown_sight > WINDOW_HEIGHT / 5)
-		god->player.updown_sight = WINDOW_HEIGHT / 5;
-	if (god->player.updown_sight < - WINDOW_HEIGHT / 5)
-		god->player.updown_sight = - WINDOW_HEIGHT / 5;
+	if (god->player.updown_sight > god->map.window_height / 5)
+		god->player.updown_sight = god->map.window_height / 5;
+	if (god->player.updown_sight < - god->map.window_height / 5)
+		god->player.updown_sight = - god->map.window_height / 5;
 
 	return (0);
 }
