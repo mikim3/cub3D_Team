@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:02:22 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 15:02:24 by soylee           ###   ########.fr       */
+/*   Updated: 2023/03/24 11:06:04 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-// t_god으로 합병됨
-// typedef struct	s_mlx
-// {
-// 	void		*mlx;
-// 	void		*win;
-// }				t_mlx;
 
 typedef struct	s_img
 {
@@ -37,9 +30,11 @@ typedef struct s_player {
 	double	rotationAngle;//바라보는 각도 시야각도 그 시야각의 중심위치    값이 0~360 아님
 	double	walkSpeed;
 	double	turnSpeed;// 바라보는 각도의 조정속도
-	double	updown_sight; // 플레이어 위아래
-} t_player;
 
+	double	turnDirection;
+	double	walkDirection;
+	double	moveside;
+} t_player;
 
 // 파싱한 맵에 대한 정보를 넣어줄 구조체
 typedef struct s_map
@@ -62,9 +57,6 @@ typedef struct s_key
 	int	left;
 	int	right_rotation; // 오른쪽을 바라봐라
 	int	left_rotation;
-	int	updown_sight; //플레이어의 위아래시야를 올릴지 내릴지
-	// int	open_door;
-	// int	mouse_on;
 }				t_key;
 
 // disposable "일회용"

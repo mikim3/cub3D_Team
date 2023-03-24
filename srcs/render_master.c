@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_master.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikim3 <mikim3@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:25:57 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/03 13:04:15 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/24 11:20:43 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // 그리는 녀석들은 반복을 해줘야 한다.
 // 그렇지 않으면 미리 그려져 있는 배경에 캐릭터가 움직임을 반복하면 그 플레이어의 그 전 위치가 맵위에
 // 계속 남아 있을 것이다. 무엇을 그리든 마찬가지다.
-int     ft_loop(t_god *god)
+int	 ft_loop(t_god *god)
 {
 	// 3D를 그릴  범위를 결정해주기
 	fill_3D_color(god);
@@ -26,12 +26,12 @@ int     ft_loop(t_god *god)
 	render_player(god);
 
 	//미니맵에 광선그리는 겸 3D 맵도 그려주기
-    draw_ray(god);
+	draw_ray(god);
 
 	// mlx윈도우에 새로운 이미지를 넣어주는 함수
 	// 4,5번째 인자는 그림을 그리기 시작하는 좌표 0,0 이면 윈도우 왼쪽위에서 시작
-    mlx_put_image_to_window(god->mlx, god->win, god->img.ptr, 0, 0);
-    return (0);
+	mlx_put_image_to_window(god->mlx, god->win, god->img.ptr, 0, 0);
+	return (0);
 }
 
 //미니맵을 제제외외한  범범위위인  3D를 표현할 범위를 특정색으로 초기화한다.
@@ -40,13 +40,13 @@ void fill_3D_color(t_god *god)
 	for (int y = 0; y < god->map.window_height; y++)
 	{
  	   for (int x = 0; x < god->map.window_width; x++)
-    	    god->img.data[god->map.window_width * y + x] = IS_3D_WALL;
+			god->img.data[god->map.window_width * y + x] = IS_3D_WALL;
 	}
 }
 
 void render_player(t_god *god)
 {
-    draw_player(god,&(god->player),&god->img);
+	draw_player(god,&(god->player),&god->img);
 }
 
 // void player_init(t_player *player, t_map *map)
@@ -57,7 +57,6 @@ void render_player(t_god *god)
 // 	player->rotationAngle = M_PI / 2; // 0도가 오른쪽 90도면 아래
 // 	player->walkSpeed = 1;
 // 	player->turnSpeed = 1.5 * (M_PI / 180); //
-// 	player->updown_sight = 0; // 0으로해도 될까??
 // }
 void player_init(t_player *player, double x, double y, char direction)
 {
@@ -75,7 +74,6 @@ void player_init(t_player *player, double x, double y, char direction)
 		player->rotationAngle = M_PI * 0.5;
 	player->walkSpeed = 1;
 	player->turnSpeed = 1.5 * (M_PI / 180); //
-	player->updown_sight = 0; // 0으로해도 될까??
 }
 
 
@@ -92,32 +90,32 @@ void render_3D_project_walls(t_god *god, int ray_num)
 
 	// 벽에 딱 붙었을때 벽뒤가 보이는 버그 고침
 	if (god->ray.distance == 0)
-    	god->ray.distance = 0.01;
+		god->ray.distance = 0.01;
 	double correct_distance = god->ray.distance * cos(god->ray.ray_angle - god->player.rotationAngle);
-    double distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
+	double distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
 	double projected_wall_height = (TILE_SIZE / correct_distance) * distance_project_plane;
 
-    int wallStripHeight = (int)projected_wall_height;
+	int wallStripHeight = (int)projected_wall_height;
 
-    int wall_top_pixel = (god->map.window_height / 2) - (wallStripHeight / 2) - god->player.updown_sight;
-    wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel - god->player.updown_sight;
+	int wall_top_pixel = (god->map.window_height / 2) - (wallStripHeight / 2);
+	wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
 
-    int wall_bottom_pixel = (god->map.window_height / 2) + (wallStripHeight / 2);
-    wall_bottom_pixel = wall_bottom_pixel > god->map.window_height ? god->map.window_height : wall_bottom_pixel;
+	int wall_bottom_pixel = (god->map.window_height / 2) + (wallStripHeight / 2);
+	wall_bottom_pixel = wall_bottom_pixel > god->map.window_height ? god->map.window_height : wall_bottom_pixel;
 
-    int color = god->ray.wasHit_vertical ? VERT_WALL_COLOR : HORI_WALL_COLOR;
+	int color = god->ray.wasHit_vertical ? VERT_WALL_COLOR : HORI_WALL_COLOR;
 
-    for (int y = wall_top_pixel; y < wall_bottom_pixel; y++)
-        for (int x = 0; x < WALL_STRIP_WIDTH; x++)
-            if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_WALL)
-                god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = color;
+	for (int y = wall_top_pixel; y < wall_bottom_pixel; y++)
+		for (int x = 0; x < WALL_STRIP_WIDTH; x++)
+			if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_WALL)
+				god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = color;
 	draw_floor(god, ray_num, wall_bottom_pixel, FLOOR_COLOR);
 	draw_sky(god, ray_num, wall_top_pixel, SKY_COLOR);
 }
 
 void	render_master(t_god *god)
 {
-    // player_init(&(god->player), &god->map); // 사용자 위치 초기화
+	// player_init(&(god->player), &god->map); // 사용자 위치 초기화
 
 	//키누를 때 어떤 함수를 사용할지 결정
 	mlx_hook(god->win, X_EVENT_KEY_PRESS, (1L << 0), &key_press, &(god->key));
