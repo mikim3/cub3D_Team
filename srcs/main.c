@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikim3 <mikim3@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 19:20:35 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/01 21:01:51 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/24 11:20:45 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void main_init(t_god *god)
 	// god->mlx = mlx_init();
 	god->win = mlx_new_window(god->mlx, god->map.window_width, god->map.window_height, "title");
 	// god->img.ptr = mlx_new_image(god->mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
-    // player.img = mlx_new_image(god->mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
+	// player.img = mlx_new_image(god->mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
 
 	// 미니맵만 출력해야 할때 는 MINI_SCALE 곱함
 	// god->img.ptr = mlx_new_image(god->mlx,
@@ -54,10 +54,10 @@ int		main(int ac, char **av)
 	// mlx.mlx = mlx_init();
 	// mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "title");
 	// map.img = mlx_new_image(mlx.mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
-    // player.img = mlx_new_image(mlx.mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
+	// player.img = mlx_new_image(mlx.mlx, (int)(MINI_SCALE * WINDOW_WIDTH), (int)(MINI_SCALE * WINDOW_HEIGHT));
 	// render_map(&mlx, &map);
-    // render_player(&mlx, &map);
-    // render_player(&god);
+	// render_player(&mlx, &map);
+	// render_player(&god);
 	render_master(&god);
 	mlx_loop(god.mlx);
 	for (int i = 0; i < god.map.map_cols; i++)
