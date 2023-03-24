@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:16:26 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/24 11:20:41 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/24 12:31:00 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	update_player(t_god *god)
 	double	newPlayerY;
 	double	moveside = 0.0;
 
-	god->player
+	// god->player
 	// 시선이동
 	if (god->key.left == TRUE)
 	{
@@ -164,35 +164,35 @@ int	update_player(t_god *god)
 	return (0);
 }
 
-static void update_player_movement(t_god *god, double *moveside , double *walkDirection, double *turnDirection)
-{
-	*turnDirection = 0;
-	*walkDirection = 0;
+// static void update_player_movement(t_god *god, double *moveside , double *walkDirection, double *turnDirection)
+// {
+// 	*turnDirection = 0;
+// 	*walkDirection = 0;
 	
 
-	if (god->key.left == TRUE)
-	{
-		moveside = M_PI_2;// 90도 회전한 방향으로
-		walkDirection = 1.0;// 앞으로이동
-	}
-	if (god->key.right == TRUE)
-	{
-		moveside = M_PI_2;
-		walkDirection = -1.0;
-	}
-	// 앞뒤
-	if (god->key.up == 1)
-	{
-		moveside = 0.0;
-		walkDirection = 1;
-	}
-	if (god->key.down == 1)
-	{
-		moveside = 0.0;
-		walkDirection = -1;
-	}
-	if (god->key.left_rotation == 1)
-		turnDirection = -1;
-	if (god->key.right_rotation == 1)
-		turnDirection = 1;
-}
+// 	if (god->key.left == TRUE)
+// 	{
+// 		moveside = M_PI_2;// 90도 회전한 방향으로
+// 		walkDirection = 1.0;// 앞으로이동
+// 	}
+// 	if (god->key.right == TRUE)
+// 	{
+// 		moveside = M_PI_2;
+// 		walkDirection = -1.0;
+// 	}
+// 	// 앞뒤
+// 	if (god->key.up == 1)
+// 	{
+// 		moveside = 0.0;
+// 		walkDirection = 1;
+// 	}
+// 	if (god->key.down == 1)
+// 	{
+// 		moveside = 0.0;
+// 		walkDirection = -1;
+// 	}
+// 	if (god->key.left_rotation == 1)
+// 		turnDirection = -1;
+// 	if (god->key.right_rotation == 1)
+// 		turnDirection = 1;
+// }

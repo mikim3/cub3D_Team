@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:23:58 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/24 11:20:40 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/24 12:26:26 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,3 @@ int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel, int color)
 	(void)color;
 	return (0);
 }
-
-
