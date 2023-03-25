@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:25:57 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/25 20:41:35 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/25 20:46:39 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void render_3D_project_walls(t_god *god, int ray_num)
 	//
 	double correct_distance = god->ray.distance * cos(god->ray.ray_angle - god->player.rotationAngle);
 	//투영면까지의 거리
-	double distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 3);
+	double distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
 	//투영면에 투사된 벽의 높이입니다.
 	double projected_wall_height = (TILE_SIZE / correct_distance) * distance_project_plane;
 	//벽 스트립의 높이입니다. 
