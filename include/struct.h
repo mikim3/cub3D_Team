@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:02:22 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/24 11:06:04 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/25 20:40:53 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct s_map
 {
 	int		map_rows;
 	int		map_cols;
-	int		window_width;
-	int		window_height;
+	int		window_width; // 윈도우의 가로넓이 보통 800
+	int		window_height; //윈도우의 세로 높이 보통 480
 	int		ray_count;//화면을 꽉채울 적절한 광선의 갯수 계산해서 넣기
 	char	**map_matrix;//
 	int		floor_color;
@@ -77,7 +77,7 @@ typedef struct s_ray {
     double  ray_angle;
     double  wall_hitX; //광선이 지나가는 길에 벽과 부딪힌 두점중에 가까운점의 x좌표
     double  wall_hitY;
-    double  distance; // 그 가까운 좌표의 거리
+    double  distance; // 그 가까운 좌표의 거리 광선이 즉 부딪힌 벽과의 거리
     int     wasHit_vertical; //광선이 수직선과 처음으로  부딪히면 값이 TRUE 수평선과 처음 부딪히면 FALSE
     int     isRay_facingDown;//광선이 바라보는 방향
     int     isRay_facingUp;
