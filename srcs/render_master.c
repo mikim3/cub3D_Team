@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:25:57 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/24 11:20:43 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/25 20:41:35 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void player_init(t_player *player, double x, double y, char direction)
 // 거리와 반비례하며 distance_project_plane을 곱하여 적절한 높이를 가지게 만들수 있다.
 // (실제 거리가 1일때 높이와 2: 루트3 비율을 갖게 되어 적당한 비율이나온다.)
 // render_3D_project_walls()가 한번 실행될  때마다  화면 왼쪽부터
-// 세로 한줄씩  3D화면이 그려짐
+// 이 함수가 호출될때 한줄씩  3D화면이 그려짐
 void render_3D_project_walls(t_god *god, int ray_num)
 {
 	// 지금 부채꼴 모양으로 시야를 받아들이기 떄문에 끝에 있는 부분(화면의 왼쪽과 오른쪽)과
@@ -91,15 +91,20 @@ void render_3D_project_walls(t_god *god, int ray_num)
 	// 벽에 딱 붙었을때 벽뒤가 보이는 버그 고침
 	if (god->ray.distance == 0)
 		god->ray.distance = 0.01;
+	//
 	double correct_distance = god->ray.distance * cos(god->ray.ray_angle - god->player.rotationAngle);
-	double distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
+	//투영면까지의 거리
+	double distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 3);
+	//투영면에 투사된 벽의 높이입니다.
 	double projected_wall_height = (TILE_SIZE / correct_distance) * distance_project_plane;
-
+	//벽 스트립의 높이입니다. 
 	int wallStripHeight = (int)projected_wall_height;
 
+	// 벽 스트립의 상단 픽셀 위치입니다.
 	int wall_top_pixel = (god->map.window_height / 2) - (wallStripHeight / 2);
 	wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
 
+	//벽 스트립의 하단 픽셀 위치입니다.
 	int wall_bottom_pixel = (god->map.window_height / 2) + (wallStripHeight / 2);
 	wall_bottom_pixel = wall_bottom_pixel > god->map.window_height ? god->map.window_height : wall_bottom_pixel;
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mikim3 <mikim3@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 20:01:35 by mikim3            #+#    #+#              #
-#    Updated: 2023/03/03 10:13:08 by mikim3           ###   ########.fr        #
+#    Updated: 2023/03/25 19:04:13 by mikim3           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ LIBFT_DIR	= libft
 LIBFT		= libft.a
 LIBS		= -L $(MLX_DIR) -l mlx -L $(LIBFT_DIR) -l ft
 
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -g3
 IFLAGS		= -I $(INC) -I $(MLX_DIR) -I $(LIBFT_DIR)/$(INC)
 APIFLAGE	= -framework OpenGL -framework Appkit
 
