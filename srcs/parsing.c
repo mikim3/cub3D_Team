@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:16:28 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 15:16:38 by soylee           ###   ########.fr       */
+/*   Updated: 2023/03/26 20:37:27 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,4 +203,5 @@ void    get_map_info(t_map *map, char **str_map)
     map->map_rows = i;
     map->window_width = map->map_cols * TILE_SIZE;
     map->window_height = map->map_rows * TILE_SIZE;
+    map->ray_count = map->window_width;
 }

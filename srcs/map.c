@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:23:58 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/24 12:26:26 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/26 22:25:02 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int	is_wall(t_map *map, double x, double y)
 	xX = floor(x / TILE_SIZE);
 	yY = floor(y / TILE_SIZE);
 
-	return map->map_matrix[yY][xX] != 0;
+	//빈공간(0)이 아니면 벽
+	return (map->map_matrix[yY][xX] != 0);
 }
 
 // (14)

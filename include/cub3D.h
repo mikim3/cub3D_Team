@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikim3 <mikim3@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:39:06 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/03 10:39:10 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/26 22:32:30 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@
 /* math */
 # define FOV_ANGLE (60 * (M_PI / 180.0))
 
-
 # define	RAY_RANGE (FOV_ANGLE) // 내가 보고 있다는걸 몇도로 나타낼까 시야각
 // 광선의 갯수 적으면 시야가 이상함? 덜 꼼꼼해짐 // 이 시야 안에서 몇개의 광선으로 내가 보고
 // 있는 방향을 나타낼지를 결정함 RAY_COUNT가
 // 2개이상 홀수개로 설정해야좋음
-# define	RAY_COUNT 799
+// # define	RAY_COUNT 799
 
 /*    */
 # define TRUE		(1)
@@ -125,7 +124,6 @@ int		is_wall(t_map *map, double x, double y);
 
 /* ray.c */
 void	ray_init(t_ray *ray, double rayAngle);
-double	distance_between_points(double x1, double y1, double x2, double y2);
 void	cal_distance(t_god *god, t_dpable_ray *horz_or_vert);
 void	draw_ray(t_god *god);
 // void    draw_line(t_god *god, double x1, double y1, double x2, double y2);
