@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:02:22 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/25 20:40:53 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/26 21:18:12 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ typedef struct	s_img
 {
 	void		*img;//
 	int			*data;
-	int			bpp; //픽셀 하나(색상 하나)를 표현하는 데 필요한 비트 수
+	int			bpp; //픽셀 하나(색상 하나)를 표현하는 데 필요한 비트 수 한픽셀이 보통 4바이트 그래서 보통 4반환
 	int			line_size; //
 	int			endian; //
 	void		*ptr;//mlx_get_data_addr()의 첫번쨰 인자 void *img_ptr로 쓰일 멤버변수
@@ -44,7 +44,7 @@ typedef struct s_map
 	int		window_width; // 윈도우의 가로넓이 보통 800
 	int		window_height; //윈도우의 세로 높이 보통 480
 	int		ray_count;//화면을 꽉채울 적절한 광선의 갯수 계산해서 넣기
-	char	**map_matrix;//
+	char	**map_matrix;
 	int		floor_color;
 	int		sky_color;
 }				t_map;
@@ -74,7 +74,7 @@ typedef struct s_dpable_ray {
 
 
 typedef struct s_ray {
-    double  ray_angle;
+    double  ray_angle;//각 광선의 각도, 만약 320*200의 해상도를 갖고 60도의 시야를 가지면 한 광선은 60/320(라디안변환)의 각도 만큼을 책임지게됨      
     double  wall_hitX; //광선이 지나가는 길에 벽과 부딪힌 두점중에 가까운점의 x좌표
     double  wall_hitY;
     double  distance; // 그 가까운 좌표의 거리 광선이 즉 부딪힌 벽과의 거리

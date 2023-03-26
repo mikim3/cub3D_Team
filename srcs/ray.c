@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:12:28 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/24 11:20:42 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/26 22:38:40 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,15 @@ void	draw_ray(t_god *god)
 	int i;
 
 	i = 0;
-	//
 	// god->player.rotationAngle 플레이어의 시야각은
 	angle = god->player.rotationAngle - (RAY_RANGE / 2.0);
 	// maxAngle = god->player.rotationAngle + (RAY_RANGE / 2.0);//CFLAGS 때문에 주석처리
 
 	//(3D기준)화면상 왼쪽부터 오른쪽으로 쭉 그려진다.
-	while (i < RAY_COUNT)
+	while (i < god->map.ray_count)
 	{
 		draw_one_ray(god, angle, i);
-		angle += RAY_RANGE / RAY_COUNT;
+		angle += RAY_RANGE / god->map.ray_count;
 		i++;
 	}
 }
@@ -126,7 +125,7 @@ void	draw_ray(t_god *god)
 // }
 
 //2차원 광선 한줄을 그린다.
-// dx == {벽과 부딪힌거리} - {플레이어현재x 좌표}
+// dx(플레이어와 벽과의 거리) == {벽과 부딪힌좌표} - {플레이어현재x 좌표}
 void	draw_line(t_god *god, double dx, double dy)
 {
 	double	ray_x;
@@ -207,7 +206,6 @@ double normalize_angle(double angle)
 	return angle;
 }
 
-
 double distance_between_points(double x1, double y1, double x2, double y2)
 {
 	return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
@@ -220,7 +218,7 @@ void	cal_distance(t_god *god, t_dpable_ray *horz_or_vert)
 	if (horz_or_vert->found_wallHit == TRUE)
 		horz_or_vert->distance = distance_between_points(god->player.x, god->player.y, horz_or_vert->wall_hitX, horz_or_vert->wall_hitY);
 	else
-		horz_or_vert->distance = 9999999;
+		horz_or_vert->distance = 999999999999;
 		// horz_or_vert->distance = DBL_MAX;
 	// 벽을 찾지 못할 경우 수평경계좌표와 수직경계좌표를 비교할때 선택되지 않도록
 }
@@ -251,7 +249,7 @@ void	cal_distance(t_god *god, t_dpable_ray *horz_or_vert)
 // }
 
 // 실질적으로 벽의 위치를 찾는 함수
-// x_adjust,b는 플레이어가 왼쪽이랑 위쪽 볼때
+// x_adjust, y_adjust는 플레이어가 왼쪽이랑 위쪽 볼때 벽이 밀려서 나타나는 현상이 있이서 값을 보정해주었다.
 void	cal_ray(t_god *god, t_dpable_ray *horz_or_vert, int x_adjust, int y_adjust)
 {
 	double next_touchX;
@@ -259,7 +257,6 @@ void	cal_ray(t_god *god, t_dpable_ray *horz_or_vert, int x_adjust, int y_adjust)
 
 	next_touchX = horz_or_vert->xintercept;
 	next_touchY = horz_or_vert->yintercept;
-
 	while (next_touchX >= 0 && next_touchX <= god->map.window_width && next_touchY >= 0 && next_touchY <= god->map.window_height)
 	{
 		if (is_wall(&(god->map), next_touchX + x_adjust, next_touchY + y_adjust))
@@ -287,9 +284,8 @@ void	cal_horz_ray(t_god *god, t_dpable_ray *horz)
 	horz->wall_hitX = 0;
 	horz->wall_hitY = 0;
 
-	//
 	horz->yintercept = floor(god->player.y  / TILE_SIZE) * TILE_SIZE;
-	// horz->yintercept = god->player.y;
+	// 밑에를 보면 타일의 크기만큼 
 	horz->yintercept += god->ray.isRay_facingDown ? TILE_SIZE : 0;
 
 	horz->xintercept = god->player.x + (horz->yintercept - god->player.y) / tan(god->ray.ray_angle);
