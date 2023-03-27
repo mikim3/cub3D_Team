@@ -49,6 +49,7 @@ void	do_exit(void)
 int	main(int ac, char **av)
 {
 	t_god	god;
+	int		i;
 
 	atexit(do_exit);
 	if (ac != 2)
@@ -60,7 +61,13 @@ int	main(int ac, char **av)
 	main_init(&god);
 	render_master(&god);
 	mlx_loop(god.mlx);
-	ft_free(god.map.map_matrix);
+	i = 0;
+	while (god.map.map_matrix[i])
+	{
+		free(god.map.map_matrix[i]);
+		i++;
+	}
+	free(god.map.map_matrix);
 	mlx_destroy_window(god.mlx, god.win);
 	return (0);
 }

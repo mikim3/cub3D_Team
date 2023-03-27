@@ -35,31 +35,21 @@ void	read_info(t_god *god, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			exit_error("read_info");
-		if (ft_strlen(line) == 0)
-			continue ;
-		check_type(god, line);
+		if (ft_strncmp(line, "\n", 2) != 0)
+		{
+			check_type(god, line);
+			cnt++;
+		}
 		free(line);
-		cnt++;
 	}
 }
 
 void	read_map(t_god *god, int fd)
 {
-	char	*line;
-	char	*gnl_tmp;
-	char	*join_tmp;
 	char	**str_map;
+	char	*line;
 
-	while (1)
-	{
-		gnl_tmp = get_next_line(fd);
-		if (!gnl_tmp)
-			break ;
-		join_tmp = ft_strjoin(line, gnl_tmp);
-		free(line);
-		free(gnl_tmp);
-		line = join_tmp;
-	}
+	line = get_line_map(fd);
 	str_map = ft_split(line, '\n');
 	if (!str_map)
 		exit_error("Fail to split map.");
@@ -70,16 +60,49 @@ void	read_map(t_god *god, int fd)
 	ft_free(str_map);
 }
 
+char	*get_line_map(int fd)
+{
+	char	*line;
+	char	*gnl_tmp;
+	char	*join_tmp;
+
+	line = ft_strdup("");
+	gnl_tmp = get_next_line(fd);
+	while (gnl_tmp && ft_strncmp(gnl_tmp, "\n", 2) == 0)
+	{
+		free(gnl_tmp);
+		gnl_tmp = get_next_line(fd);
+	}
+	while (gnl_tmp)
+	{
+		if (ft_strncmp(gnl_tmp, "\n", 2) == 0)
+		{
+			free(gnl_tmp);
+			gnl_tmp = ft_strdup(" \n");
+		}
+		join_tmp = ft_strjoin(line, gnl_tmp);
+		free(line);
+		free(gnl_tmp);
+		line = join_tmp;
+		gnl_tmp = get_next_line(fd);
+	}
+	return (line);
+}
+
 void	check_type(t_god *god, char *line)
 {
 	static char	*type[6] = {"NO ", "SO ", "WE ", "EA ", "F ", "C "};
 	static int	checked[6];
 	int			i;
+	int			len;
 
 	i = 0;
 	while (i < 6)
 	{
-		if (ft_strncmp(line, type[i], 3) == 0)
+		len = 2;
+		if (i < 4)
+			len = 3;
+		if (ft_strncmp(line, type[i], len) == 0)
 		{
 			if (checked[i])
 				exit_error("Duplicated type");
@@ -106,8 +129,6 @@ void	get_map_info(t_map *map, char **str_map)
 	while (str_map[i])
 	{
 		len = ft_strlen(str_map[i]);
-		if (len == 0)
-			exit_error("There is Empty line in map.");
 		if (max < len)
 			max = len;
 		i++;

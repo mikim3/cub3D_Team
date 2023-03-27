@@ -44,7 +44,7 @@ typedef struct s_map
 	int		window_width; // 윈도우의 가로넓이 보통 800
 	int		window_height; //윈도우의 세로 높이 보통 480
 	int		ray_count;//화면을 꽉채울 적절한 광선의 갯수 계산해서 넣기
-	char	**map_matrix;
+	int		**map_matrix;
 	int		floor_color;
 	int		sky_color;
 }				t_map;

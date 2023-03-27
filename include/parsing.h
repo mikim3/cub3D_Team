@@ -19,6 +19,7 @@
 void	read_file(t_god *god, char *filename);
 void	read_info(t_god *god, int fd);
 void	read_map(t_god *god, int fd);
+char	*get_line_map(int fd);
 void	check_type(t_god *god, char *line);
 void	get_map_info(t_map *map, char **str_map);
 
