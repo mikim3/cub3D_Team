@@ -14,20 +14,16 @@
 
 void	key_init(t_key *key)
 {	
-	// 이동
 	key->left = 0;
 	key->right = 0;
 	key->up = 0;
 	key->down = 0;
-
-	// 방향
 	key->right_rotation = FALSE;
 	key->left_rotation = FALSE;
 }
 
-int		key_press(int keycode, t_key *key)
+int	key_press(int keycode, t_key *key)
 {
-	// 이동방향
 	if (keycode == KEY_A)
 		key->left = 1;
 	if (keycode == KEY_D)
@@ -36,19 +32,17 @@ int		key_press(int keycode, t_key *key)
 		key->up = 1;
 	if (keycode == KEY_S)
 		key->down = 1;
-
-	// 바라보는 방향
 	if (keycode == KEY_RIGHT)
 		key->right_rotation = TRUE;
 	if (keycode == KEY_LEFT)
-		key->left_rotation = TRUE;//??
+		key->left_rotation = TRUE;
 
 	if (keycode == KEY_ESC)
 		exit(0);
 	return (0);
 }
 
-int	 key_release(int keycode, t_key *key)
+int	key_release(int keycode, t_key *key)
 {
 	if (keycode == KEY_A)
 		key->left = 0;

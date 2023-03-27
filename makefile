@@ -16,14 +16,16 @@ INC			= include
 SRCS_DIR	= srcs
 SRCS		=			\
 		main.c			\
-		map.c			\
-		player.c		\
+		check_map.c		\
 		key.c			\
-		render_master.c	\
-		ray.c			\
-		utils.c			\
+		map.c			\
 		parsing.c		\
-		check_map.c
+		player.c		\
+		ray.c			\
+		read.c			\
+		render_master.c	\
+		render_wall.c	\
+		utils.c
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

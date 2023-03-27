@@ -44,18 +44,19 @@ typedef struct s_map
 	int		window_width; // 윈도우의 가로넓이 보통 800
 	int		window_height; //윈도우의 세로 높이 보통 480
 	int		ray_count;//화면을 꽉채울 적절한 광선의 갯수 계산해서 넣기
-	char	**map_matrix;
+	int		**map_matrix;
 	int		floor_color;
 	int		sky_color;
 }				t_map;
 
+//이동 및 방향
 typedef struct s_key
 {
 	int	up;
 	int	down;
 	int	right;
 	int	left;
-	int	right_rotation; // 오른쪽을 바라봐라
+	int	right_rotation;
 	int	left_rotation;
 }				t_key;
 
@@ -91,12 +92,6 @@ typedef struct s_texture
 	int		height;
 	t_img	img;
 }	t_texture;
-
-typedef enum e_info
-{
-    NO, SO, WE, EA, F, C
-} t_info;
-
 typedef struct s_god {
 	t_player player;
 	t_img	img;
@@ -118,7 +113,7 @@ typedef struct s_3d_info
 	int		wall_bottom;
 	int		correct_wall_top;
 	int		correct_wall_bottom;
-	t_info	direction;
+	int	direction;
 }	t_3d_info;
 
 #endif

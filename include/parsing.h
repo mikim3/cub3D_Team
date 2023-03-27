@@ -12,21 +12,36 @@
 
 #ifndef PARSING_H
 # define PARSING_H
-
 # include <fcntl.h>
 # include "struct.h"
 
-void    read_file(t_god *god, char *filename);
-void    read_map(t_god *god, int fd);
-void    parsing_map(t_god *god, char **str_map);
-void    get_map_info(t_map *map, char **str_map);
-void    check_valid_char(t_god *god, char **str);
-void    check_around_wall(t_map *map);
-void    check_space_pos(t_map *map, int r, int c);
+// 읽어들일 정보
+# define NO (0)
+# define SO (1)
+# define WE (2)
+# define EA (3)
+# define F  (4)
+# define C  (5)
 
-void    read_info(t_god *god, int fd);
-void    check_type(t_god *god, char * line);
-void    parse_texture(t_god *god, char *line, int type);
-void    parse_color(t_god *god, char *line, int type);
+// read.c
+void	read_file(t_god *god, char *filename);
+void	read_info(t_god *god, int fd);
+void	read_map(t_god *god, int fd);
+char	*get_line_map(int fd);
+void	check_type(t_god *god, char *line);
+void	get_map_info(t_map *map, char **str_map);
+
+//parsing.c
+void	parse_texture(t_god *god, char *filename, int type);
+void	parse_color(t_god *god, char *line, int type);
+int		get_color(char **str_num);
+void	parsing_map(t_god *god, char **str_map);
+void	fill_map(t_god *god, char *line_map, int i);
+
+//check_map.c
+void	check_valid_char(t_god *god, char **str);
+void	check_valid_line(t_god *god, char *line, int i, int	*tag);
+void	check_around_wall(t_map *map);
+void	check_space_pos(t_map *map, int r, int c);
 
 #endif
