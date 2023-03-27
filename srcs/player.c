@@ -6,29 +6,12 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:16:26 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/27 10:25:56 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/27 19:04:35 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// player위치에 맞게 player그리기
-// (맵이 쭉 그려지고 그 뒤에 사용자 그림)
-// (8) 에서 함수 바꿈
-// int	draw_player(t_god *god)
-// {
-
-// 	for (int row = -(god->player.thickness) / 2; row <= (god->player.thickness) / 2; row++)
-// 	{
-// 		for (int col = -(god->player.thickness) / 2; col <= (god->player.thickness) / 2; col++)
-// 		{
-// 			god->img.data[(int)(MINI_SCALE * (WINDOW_WIDTH * ((int)god->player.y + row) + ((int)god->player.x + col)))] = 0x0000FF;
-// 		}
-// 	}
-// 	return (0);
-// }
-
-//
 int	draw_player(t_god *god, t_player *player, t_img *img)
 {
 	int x;

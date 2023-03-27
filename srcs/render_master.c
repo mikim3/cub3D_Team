@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:25:57 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/27 11:44:58 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/27 18:55:30 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,35 +49,6 @@ void render_player(t_god *god)
 	draw_player(god,&(god->player),&god->img);
 }
 
-// void player_init(t_player *player, t_map *map)
-// {
-// 	player->x = map->window_width / 2;
-// 	player->y = map->window_height / 2;
-// 	player->thickness = PLAYER_THICKNESS;
-// 	player->rotationAngle = M_PI / 2; // 0도가 오른쪽 90도면 아래
-// 	player->walkSpeed = 1;
-// 	player->turnSpeed = 1.5 * (M_PI / 180); //
-// }
-
-void player_init(t_player *player, double x, double y, char direction)
-{
-	player->x = (x + 0.5) * TILE_SIZE;
-	player->y = (y + 0.5) * TILE_SIZE;
-	player->thickness = PLAYER_THICKNESS;
-	// 0도가 오른쪽 90도면 아래
-	if (direction == 'N') //위
-		player->rotationAngle = M_PI * 1.5;
-	else if (direction == 'E') //오른쪽
-		player->rotationAngle = 0;
-	else if (direction == 'W') //왼쪽
-		player->rotationAngle = M_PI;
-	else //아래
-		player->rotationAngle = M_PI * 0.5;
-	player->walkSpeed = WALKSPEED;
-	player->turnSpeed = TURNSPEED;
-}
-
-
 // 3D 구역을 그리는 함수
 // 거리와 반비례하며 distance_project_plane을 곱하여 적절한 높이를 가지게 만들수 있다.
 // render_3D_project_walls()가 한번 실행될  때마다  화면 왼쪽부터
@@ -115,38 +86,7 @@ int		select_color(t_god *god, t_3d_info *info, int y)
 	return (god->texture[info->direction].img.data[r * god->texture[info->direction].width + c]);
 }
 
-void	init_info(t_god *god, t_3d_info *info)
-{
-	info->correct_distance = god->ray.distance * cos(god->ray.ray_angle - god->player.rotationAngle);
-	//투영면까지의 거리
-	info->distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
-	//투영면에 투사된 벽의 높이입니다.
-	info->projected_wall_height = (TILE_SIZE / info->correct_distance) * info->distance_project_plane;
-	//벽 스트립의 높이입니다. 
-	info->wallStripHeight = (int)info->projected_wall_height;
 
-	// 벽 스트립의 상단 픽셀 위치입니다.
-	info->wall_top = (god->map.window_height / 2) - (info->wallStripHeight / 2);
-	info->correct_wall_top = info->wall_top;
-	if (info->wall_top < 0)
-		info->correct_wall_top = 0;
-
-	//벽 스트립의 하단 픽셀 위치입니다.
-	info->wall_bottom = (god->map.window_height / 2) + (info->wallStripHeight / 2);
-	info->correct_wall_bottom = info->wall_bottom;
-	if (info->wall_top > god->map.window_height)
-		info->correct_wall_bottom = god->map.window_height - 1;
-
-	if (god->ray.wasHit_vertical == TRUE && (god->player.x - god->ray.wall_hitX) > 0)
-		info->direction = WE;
-	else if (god->ray.wasHit_vertical == TRUE)
-		info->direction = EA;
-	else if ((god->player.y - god->ray.wall_hitY) > 0)
-		info->direction = NO;
-	else
-		info->direction = SO;
-
-}
 void	render_master(t_god *god)
 {
 	// player_init(&(god->player), &god->map); // 사용자 위치 초기화

@@ -6,7 +6,7 @@
 #    By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 20:01:35 by mikim3            #+#    #+#              #
-#    Updated: 2023/03/25 19:04:13 by mikim3           ###   ########.fr        #
+#    Updated: 2023/03/27 18:51:39 by mikim3           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS		=			\
 		ray.c			\
 		utils.c			\
 		parsing.c		\
-		check_map.c
+		check_map.c		\
+		init.c
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

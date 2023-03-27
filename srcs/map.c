@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:23:58 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/27 11:36:07 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/27 19:03:45 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,6 @@ void	setting_map_location(t_map *map, int *x, int *y, int x2, int y2)
 		*y = (int)((1 - MINIMAP_SCALE) * TILE_SIZE * map->map_rows + MINIMAP_SCALE * y2);
 	}
 }
-
-
-// 이전버전 (8)에서 바뀜 fill_squares()
-// void fill_squares(t_img *img, int x, int y, int color)
-// {
-// 	int i;
-// 	int j;
-
-// 	j = 0;
-// 	while (j < (int)(MINI_SCALE * TILE_SIZE))
-// 	{
-// 		i = 0;
-// 		while (i < (int)(MINI_SCALE * TILE_SIZE))
-// 		{
-// 			img->data[(int)(MINI_SCALE * WINDOW_WIDTH) * (y + j) + (x + i)] = color;
-// 			i++;
-// 		}
-// 		j++;
-// 	}
-// }
 
 // 받은 좌표에 정의(define)된 사각형의 크기에 따라서 한칸을 그린다.
 void fill_squares(t_img *img, t_map *map, int x, int y, int color)
@@ -90,14 +70,10 @@ void	render_map(t_god *god)
 		col = 0;
 		while (col < god->map.map_cols)
 		{
-			// if (mini_map[row][col] == 1)
-			// 	fill_squares(&god->img, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), 0x000000);
-			// else
-			// 	fill_squares(&god->img, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), 0xffffff);
 			if (god->map.map_matrix[row][col] == 1)
-				fill_squares(&god->img, &god->map, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), 0x000000);
+				fill_squares(&god->img, &god->map, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), TILE_2D_COLOR);
 			else if (god->map.map_matrix[row][col] == 0)
-				fill_squares(&god->img, &god->map, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), 0xffffff);
+				fill_squares(&god->img, &god->map, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), WALL_2D_COLOR);
 			col++;
 		}
 		row++;
