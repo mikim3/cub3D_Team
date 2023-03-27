@@ -89,7 +89,7 @@ typedef struct s_texture
 {
 	int		width;
 	int		height;
-	void	*texture;
+	t_img	img;
 }	t_texture;
 
 typedef enum e_info
@@ -107,5 +107,18 @@ typedef struct s_god {
 	void	*mlx;
 	void	*win;
 } t_god;
+
+typedef struct s_3d_info
+{
+	double correct_distance;
+	double distance_project_plane;
+	double projected_wall_height;
+	int		wallStripHeight;
+	int		wall_top;
+	int		wall_bottom;
+	int		correct_wall_top;
+	int		correct_wall_bottom;
+	t_info	direction;
+}	t_3d_info;
 
 #endif

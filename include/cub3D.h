@@ -141,4 +141,7 @@ void fill_3D_color(t_god *god);
 int draw_sky(t_god *god, int ray_num, int wall_top_pixel);
 int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel);
 
+void	init_info(t_god *god, t_3d_info *info);
+int		select_color(t_god *god, t_3d_info *info, int y);
+
 #endif
