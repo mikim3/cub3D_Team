@@ -187,7 +187,7 @@ void	draw_one_ray(t_god *god, double angle, int i)
 	}
 	// draw_line(god, god->player.x, god->player.y, god->ray.wall_hitX, god->ray.wall_hitY);
 	draw_line(god, god->ray.wall_hitX - god->player.x, god->ray.wall_hitY - god->player.y);
-	render_3D_project_walls(god, i);
+	render_3d_project_walls(god, i);
 }
 
 // 0 ~ 2PI 값을 벗어나면 값을 보정해준다.

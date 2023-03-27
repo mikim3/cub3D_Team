@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 15:03:28 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 15:03:29 by soylee           ###   ########.fr       */
+/*   Created: 2023/03/27 20:55:04 by soylee            #+#    #+#             */
+/*   Updated: 2023/03/27 20:55:06 by soylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef KEY_H
+# define KEY_H
+# include "struct.h"
 
-// utils.c
-int		print_error(char *msg);
-void	exit_error(char *msg);
-int		check_extension(char *filename);
-void	ft_free(char **str);
+//key.c
+void	key_init(t_key *key);
+int		key_press(int keycode, t_key *key);
+int		key_release(int keycode, t_key *key);
 
 #endif

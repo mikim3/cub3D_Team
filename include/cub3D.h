@@ -10,26 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __CUB3D_H__
-# define __CUB3D_H__
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-#define _USE_MATH_DEFINES //math.h안에 M_PI값을 쓸수 있게해주는 변수
-#include <math.h> // floor,
-#include <float.h> // DBL_MAX
-#include "mlx.h"
-#include "libft.h"
+# define _USE_MATH_DEFINES //math.h안에 M_PI값을 쓸수 있게해주는 변수
+# include <math.h> // floor,
+# include <float.h> // DBL_MAX
+# include "mlx.h"
+# include "libft.h"
 
-#include "struct.h"
-#include "utils.h"
-#include "parsing.h"
+# include "struct.h"
+# include "key.h"
+# include "map.h"
+# include "parsing.h"
+# include "player.h"
+# include "ray.h"
+# include "render.h"
+# include "utils.h"
 
 // 1배율은 꽉참
-#define MINI_SCALE 1
-#define TILE_SIZE 40
+# define MINI_SCALE 1
+# define TILE_SIZE 40
 // 맵의 행 크기, 파싱을 받을 경우 그 맵의 크기를 구해서 만들어 줘야 된다.
 // #define MAP_NUM_ROWS 12
 // #define MAP_NUM_COLS 20
@@ -88,60 +93,57 @@
 
 # define UPDOWNSPEED		(3)
 
-void	fill_squares(t_img *img, t_map *map, int x, int y, int color);
+// void	fill_squares(t_img *img, t_map *map, int x, int y, int color);
 
-/* render */
-void	render_master(t_god *god); //모든 렌더링을 수행해주는 함수
-void	render_map(t_god	*god);
-// void	render_map(t_mlx *mlx, t_img *map);
-// void	render_player(t_mlx *mlx, t_img *map);
-void	render_player(t_god *god);
-void	render_3D_project_walls(t_god *god, int ray_num);
+// /* render */
+// void	render_master(t_god *god); //모든 렌더링을 수행해주는 함수
+// void	render_map(t_god	*god);
+// // void	render_map(t_mlx *mlx, t_img *map);
+// // void	render_player(t_mlx *mlx, t_img *map);
+// void	render_player(t_god *god);
+// void	render_3D_project_walls(t_god *god, int ray_num);
 
+// void    setting_map_location(t_map *map, int *x, int *y, int x2, int y2);
 
+// /* player */
+// // void player_init(t_player *player, t_map *map);
+// void    player_init(t_player *player, double x, double y, char direction);
+// // int    draw_player(t_mlx *mlx, t_player *player, t_img *map);
+// // int    draw_player(t_god *god);
+// int     draw_player(t_god *god, t_player *player, t_img *img);
+// int		update_player(t_god *god);
 
-void    setting_map_location(t_map *map, int *x, int *y, int x2, int y2);
+// void		key_init(t_key *key);
+// int        key_press(int keycode, t_key *key);
+// int        key_release(int keycode, t_key *key);
+// int		key_exit(void);
 
-/* player */
-// void player_init(t_player *player, t_map *map);
-void player_init(t_player *player, double x, double y, char direction);
-// int    draw_player(t_mlx *mlx, t_player *player, t_img *map);
-// int    draw_player(t_god *god);
-int    draw_player(t_god *god, t_player *player, t_img *img);
-int		update_player(t_god *god);
+// int		is_wall(t_map *map, double x, double y);
+// // int		check_edge(t_god *god, double x1, double x2, double y1, double y2);
 
-void		key_init(t_key *key);
-int        key_press(int keycode, t_key *key);
-int        key_release(int keycode, t_key *key);
-int		key_exit(void);
+// /* ray.c */
+// void	ray_init(t_ray *ray, double rayAngle);
+// void	cal_distance(t_god *god, t_dpable_ray *horz_or_vert);
+// void	draw_ray(t_god *god);
+// // void    draw_line(t_god *god, double x1, double y1, double x2, double y2);
+// // 광선 한줄 그림
+// void	draw_line(t_god *god, double dx, double dy);
+// // void	draw_one_ray(t_god *god, double angle);
+// void	draw_one_ray(t_god *god, double angle, int i);
+// double	normalize_angle(double angle);
 
-int		is_wall(t_map *map, double x, double y);
-// int		check_edge(t_god *god, double x1, double x2, double y1, double y2);
+// double	distance_between_points(double x1, double y1, double x2, double y2);
+// // void    cal_ray(t_god *god, t_dpable_ray *horz_or_vert);
+// void	cal_ray(t_god *god, t_dpable_ray *horz_or_vert, int x_adjust, int y_adjust);
 
-/* ray.c */
-void	ray_init(t_ray *ray, double rayAngle);
-void	cal_distance(t_god *god, t_dpable_ray *horz_or_vert);
-void	draw_ray(t_god *god);
-// void    draw_line(t_god *god, double x1, double y1, double x2, double y2);
-// 광선 한줄 그림
-void    draw_line(t_god *god, double dx, double dy);
-// void	draw_one_ray(t_god *god, double angle);
-void	draw_one_ray(t_god *god, double angle, int i);
-double	normalize_angle(double angle);
+// void    cal_horz_ray(t_god *god, t_dpable_ray *horz);
+// void cal_vert_ray(t_god *god, t_dpable_ray *vert);
+// void fill_3D_color(t_god *god);
 
+// int draw_sky(t_god *god, int ray_num, int wall_top_pixel);
+// int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel);
 
-double distance_between_points(double x1, double y1, double x2, double y2);
-// void    cal_ray(t_god *god, t_dpable_ray *horz_or_vert);
-void    cal_ray(t_god *god, t_dpable_ray *horz_or_vert, int x_adjust, int y_adjust);
-
-void    cal_horz_ray(t_god *god, t_dpable_ray *horz);
-void cal_vert_ray(t_god *god, t_dpable_ray *vert);
-void fill_3D_color(t_god *god);
-
-int draw_sky(t_god *god, int ray_num, int wall_top_pixel);
-int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel);
-
-void	init_info(t_god *god, t_3d_info *info);
-int		select_color(t_god *god, t_3d_info *info, int y);
+// void	init_info(t_god *god, t_3d_info *info);
+// int		select_color(t_god *god, t_3d_info *info, int y);
 
 #endif

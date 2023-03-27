@@ -49,13 +49,14 @@ typedef struct s_map
 	int		sky_color;
 }				t_map;
 
+//이동 및 방향
 typedef struct s_key
 {
 	int	up;
 	int	down;
 	int	right;
 	int	left;
-	int	right_rotation; // 오른쪽을 바라봐라
+	int	right_rotation;
 	int	left_rotation;
 }				t_key;
 

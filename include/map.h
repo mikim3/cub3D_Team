@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 15:03:28 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 15:03:29 by soylee           ###   ########.fr       */
+/*   Created: 2023/03/27 21:34:28 by soylee            #+#    #+#             */
+/*   Updated: 2023/03/27 21:34:28 by soylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef MAP_H
+# define MAP_H
+# include "struct.h"
 
-// utils.c
-int		print_error(char *msg);
-void	exit_error(char *msg);
-int		check_extension(char *filename);
-void	ft_free(char **str);
+//map.c
+void	setting_map_location(t_map *map, int *x, int *y, int x2, int y2);
+void	fill_squares(t_img *img, t_map *map, int x, int y, int color);
+void	render_map(t_god *god);
+int		is_wall(t_map *map, double x, double y);
+int		draw_sky(t_god *god, int ray_num, int wall_top_pixel);
+int		draw_floor(t_god *god, int ray_num, int wall_bottom_pixel);
 
 #endif

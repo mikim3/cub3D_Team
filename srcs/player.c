@@ -18,7 +18,7 @@
 // int	draw_player(t_god *god)
 // {
 
-// 	for (int row = -(god->player.thickness) / 2; row <= (god->player.thickness) / 2; row++)
+// 	for (int row = -(god->player.thickness) / 2;row <= (god->player.thickness) / 2; row++)
 // 	{
 // 		for (int col = -(god->player.thickness) / 2; col <= (god->player.thickness) / 2; col++)
 // 		{
@@ -31,18 +31,24 @@
 //
 int	draw_player(t_god *god, t_player *player, t_img *img)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
+	int	row;
+	int	col;
 
 	setting_map_location(&(god->map), &x, &y, player->x, player->y);
 	update_player(god);
-	// 플레이어 중앙점을 중심으로 그림
-	for (int row = -(player->thickness) / 2; row <= (player->thickness) / 2; row++)
+	row = -(player->thickness) / 2;
+	while (row <= player->thickness / 2)
 	{
-		for (int col = -(player->thickness) / 2; col <= (player->thickness) / 2; col++)
+		col = -(player->thickness) / 2;
+		while (col <= player->thickness / 2)
 		{
-			img->data[god->map.window_width * (y + row) + (x + col)] = PLAYER_2D_COLOR;
+			img->data[god->map.window_width * (y + row) + (x + col)] = \
+			PLAYER_2D_COLOR;
+			col++;
 		}
+		row++;
 	}
 	return (0);
 }
