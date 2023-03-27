@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:02:22 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/26 21:18:12 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/27 10:33:14 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_player {
 	double	x; // 2차원시점 플레이어의 좌우좌표
 	double	y; // 상하좌표
 	int	thickness; // 두께
-	double	rotationAngle;//바라보는 각도 시야각도 그 시야각의 중심위치    값이 0~360 아님
+	double	rotationAngle;//바라보는 각도 시야각도 그 시야각의 중심위치  값이 0~360아님 라디안값임
 	double	walkSpeed;
 	double	turnSpeed;// 바라보는 각도의 조정속도
 

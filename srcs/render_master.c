@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:25:57 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/25 20:46:39 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/27 11:44:58 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void fill_3D_color(t_god *god)
 	for (int y = 0; y < god->map.window_height; y++)
 	{
  	   for (int x = 0; x < god->map.window_width; x++)
-			god->img.data[god->map.window_width * y + x] = IS_3D_WALL;
+			god->img.data[god->map.window_width * y + x] = IS_3D_AREA;
 	}
 }
 
@@ -58,6 +58,7 @@ void render_player(t_god *god)
 // 	player->walkSpeed = 1;
 // 	player->turnSpeed = 1.5 * (M_PI / 180); //
 // }
+
 void player_init(t_player *player, double x, double y, char direction)
 {
 	player->x = (x + 0.5) * TILE_SIZE;
@@ -72,14 +73,13 @@ void player_init(t_player *player, double x, double y, char direction)
 		player->rotationAngle = M_PI;
 	else //아래
 		player->rotationAngle = M_PI * 0.5;
-	player->walkSpeed = 1;
-	player->turnSpeed = 1.5 * (M_PI / 180); //
+	player->walkSpeed = WALKSPEED;
+	player->turnSpeed = TURNSPEED;
 }
 
 
 // 3D 구역을 그리는 함수
 // 거리와 반비례하며 distance_project_plane을 곱하여 적절한 높이를 가지게 만들수 있다.
-// (실제 거리가 1일때 높이와 2: 루트3 비율을 갖게 되어 적당한 비율이나온다.)
 // render_3D_project_walls()가 한번 실행될  때마다  화면 왼쪽부터
 // 이 함수가 호출될때 한줄씩  3D화면이 그려짐
 void render_3D_project_walls(t_god *god, int ray_num)
@@ -93,6 +93,7 @@ void render_3D_project_walls(t_god *god, int ray_num)
 		god->ray.distance = 0.01;
 	//
 	double correct_distance = god->ray.distance * cos(god->ray.ray_angle - god->player.rotationAngle);
+	// double correct_distance = god->ray.distance * cos(god->ray.ray_angle);
 	//투영면까지의 거리
 	double distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
 	//투영면에 투사된 벽의 높이입니다.
@@ -112,10 +113,10 @@ void render_3D_project_walls(t_god *god, int ray_num)
 
 	for (int y = wall_top_pixel; y < wall_bottom_pixel; y++)
 		for (int x = 0; x < WALL_STRIP_WIDTH; x++)
-			if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_WALL)
+			if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
 				god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = color;
-	draw_floor(god, ray_num, wall_bottom_pixel, FLOOR_COLOR);
-	draw_sky(god, ray_num, wall_top_pixel, SKY_COLOR);
+	draw_floor(god, ray_num, wall_bottom_pixel);
+	draw_sky(god, ray_num, wall_top_pixel);
 }
 
 void	render_master(t_god *god)
