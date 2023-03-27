@@ -97,12 +97,12 @@ void render_3D_project_walls(t_god *god, int ray_num)
 	for (int y = info.correct_wall_top; y < info.correct_wall_bottom; y++)
 		for (int x = 0; x < WALL_STRIP_WIDTH; x++)
 			if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
-				god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = select_color(god, &info, y);
+				god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = select_color(god, &info, (y - info.wall_top)* WALL_STRIP_WIDTH + x);
 	draw_floor(god, ray_num, info.correct_wall_bottom);
 	draw_sky(god, ray_num, info.correct_wall_top);
 }
 
-int		select_color(t_god *god, t_3d_info *info, int y)
+int		select_color(t_god *god, t_3d_info *info, int idx)
 {
 	int r;
 	int c;
@@ -111,7 +111,7 @@ int		select_color(t_god *god, t_3d_info *info, int y)
 	else
 		c = ((int)god->ray.wall_hitX % TILE_SIZE);
 	c *= god->texture[info->direction].width / TILE_SIZE;
-	r = (y - info->wall_top) * god->texture[info->direction].height / info->wallStripHeight;
+	r = (idx) * god->texture[info->direction].height / info->wallStripHeight;
 	return (god->texture[info->direction].img.data[r * god->texture[info->direction].width + c]);
 }
 
