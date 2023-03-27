@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:16:26 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/24 12:31:00 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/27 10:25:56 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,12 +146,6 @@ int	update_player(t_god *god)
 	int	moveStep = walkDirection * god->player.walkSpeed;
 	newPlayerX = god->player.x + moveStep * cos(god->player.rotationAngle - moveside);
 	newPlayerY = god->player.y + moveStep * sin(god->player.rotationAngle - moveside);
-
-	// printf("key left == %d  key right == %d key up == %d key down == %d \n",god->key.left,god->key.right,god->key.up,god->key.down);
-	// printf("moveStep == %d newPlayerX == %f newPlayerY == %f\n",moveStep, newPlayerX, newPlayerY);
-	// printf("cos rotationAngle == %f sin rotationAngle %f\n",cos(god->player.rotationAngle), sin(god->player.rotationAngle));
-	// printf("rotationAngle == %f \n",god->player.rotationAngle);
-	// printf("walkDirection %f \n",walkDirection);
 
 	// (14) 보고 !check_edge(god, &p1, &p2) && 추가할지 고민하기
 	// 벽이면 이동 불가

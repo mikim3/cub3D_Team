@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:39:06 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/26 22:32:30 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/27 11:37:07 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 // 1배율은 꽉참
 #define MINI_SCALE 1
 #define TILE_SIZE 40
-// 맵의 행 크기, 파싱을 받을 경우 그 맵의 크기를 구구해해서  ak만들어 줘야 된다.
+// 맵의 행 크기, 파싱을 받을 경우 그 맵의 크기를 구해서 만들어 줘야 된다.
 // #define MAP_NUM_ROWS 12
 // #define MAP_NUM_COLS 20
 // #define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
@@ -57,10 +57,6 @@
 # define FOV_ANGLE (60 * (M_PI / 180.0))
 
 # define	RAY_RANGE (FOV_ANGLE) // 내가 보고 있다는걸 몇도로 나타낼까 시야각
-// 광선의 갯수 적으면 시야가 이상함? 덜 꼼꼼해짐 // 이 시야 안에서 몇개의 광선으로 내가 보고
-// 있는 방향을 나타낼지를 결정함 RAY_COUNT가
-// 2개이상 홀수개로 설정해야좋음
-// # define	RAY_COUNT 799
 
 /*    */
 # define TRUE		(1)
@@ -76,10 +72,10 @@
 # define MINIMAP_SCALE (0.25)
 # define MAP_LOCATION (RIGHTDOWN_MAP)
 # define PLAYER_THICKNESS 6
-# define WALKSPEED			(2.0)
-# define TURNSPEED			(0.02617993878)
+# define WALKSPEED			(1)
+# define TURNSPEED			(1.5 * (M_PI / 180))
 # define WALL_STRIP_WIDTH	(1)
-# define IS_3D_WALL			(0x663333)
+# define IS_3D_AREA			(0x663333)
 # define VIRTICAL_COLOR		(0x00FF00)
 # define HORIZON_COLOR		(0x0000FF)
 # define PLAYER_2D_COLOR	(0x00AAAA)
@@ -142,7 +138,7 @@ void    cal_horz_ray(t_god *god, t_dpable_ray *horz);
 void cal_vert_ray(t_god *god, t_dpable_ray *vert);
 void fill_3D_color(t_god *god);
 
-int draw_sky(t_god *god, int ray_num, int wall_top_pixel, int color);
-int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel, int color);
+int draw_sky(t_god *god, int ray_num, int wall_top_pixel);
+int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel);
 
 #endif

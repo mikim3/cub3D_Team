@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:23:58 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/26 22:25:02 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/27 11:36:07 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,25 +150,23 @@ int	is_wall(t_map *map, double x, double y)
 
 // }
 
-int draw_sky(t_god *god, int ray_num, int wall_top_pixel, int color)
+int draw_sky(t_god *god, int ray_num, int wall_top_pixel)
 {
 	// y가 벽의 탑보다 높으면 그린다.
 	for (int y = 0; y < wall_top_pixel; y++)
 		for (int x = 0; x < WALL_STRIP_WIDTH; x++)
 			if (god->img.data[god->map.window_width * y + \
-				(x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_WALL)
+				(x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
 				god->img.data[god->map.window_width * y + \
 				(x + ray_num * WALL_STRIP_WIDTH)] = god->map.sky_color;
-	(void)color;
 	return (0);
 }
 
-int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel, int color)
+int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel)
 {
 	for (int y = wall_bottom_pixel; y < god->map.window_height; y++)
 		for (int x = 0; x < WALL_STRIP_WIDTH; x++)
-			if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_WALL)
+			if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
 				god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = god->map.floor_color;
-	(void)color;
 	return (0);
 }
