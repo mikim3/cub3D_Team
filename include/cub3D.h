@@ -41,23 +41,6 @@
 // #define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
 // #define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
-/* key event */
-# define X_EVENT_KEY_PRESS			2
-# define X_EVENT_KEY_RELEASE		3
-# define X_EVENT_KEY_EXIT			17
-
-/* key */
-# define KEY_ESC    53
-# define KEY_W      13
-# define KEY_A      0
-# define KEY_S      1
-# define KEY_D      2
-
-# define KEY_LEFT	(123)
-# define KEY_RIGHT	(124)
-# define KEY_UP 	(126)
-# define KEY_DOWN	(125)
-
 /* math */
 # define FOV_ANGLE (60 * (M_PI / 180.0))
 
@@ -67,12 +50,6 @@
 # define TRUE		(1)
 # define FALSE		(0)
 
-/* 맵위 위치 */
-# define LEFTUP_MAP (1)
-# define LEFTDOWN_MAP (2)
-# define RIGHTUP_MAP (3)
-# define RIGHTDOWN_MAP (4)
-
 // 괄호() 안에 값으로 맵의 위치를 설정
 # define MINIMAP_SCALE (0.25)
 # define MAP_LOCATION (RIGHTDOWN_MAP)
@@ -81,14 +58,14 @@
 # define TURNSPEED			(1.5 * (M_PI / 180))
 # define WALL_STRIP_WIDTH	(1)
 # define IS_3D_AREA			(0x663333)
-# define VIRTICAL_COLOR		(0x00FF00)
-# define HORIZON_COLOR		(0x0000FF)
+// # define VIRTICAL_COLOR		(0x00FF00)
+// # define HORIZON_COLOR		(0x0000FF)
 # define PLAYER_2D_COLOR	(0x00AAAA)
-# define SKY_COLOR			(0x444444)
-# define FLOOR_COLOR		(0x000000)
+// # define SKY_COLOR			(0x444444)
+// # define FLOOR_COLOR		(0x000000)
 # define RAY_COLOR			(0xFF0000)
-# define VERT_WALL_COLOR	(0xFFFFFF)
-# define HORI_WALL_COLOR	(0xAAAAAA)
+// # define VERT_WALL_COLOR	(0xFFFFFF)
+// # define HORI_WALL_COLOR	(0xAAAAAA)
 // # define RAY_RANGE			(FOV_ANGLE)
 
 # define UPDOWNSPEED		(3)

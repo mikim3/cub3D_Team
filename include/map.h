@@ -14,6 +14,12 @@
 # define MAP_H
 # include "struct.h"
 
+/* 맵위 위치 */
+# define LEFTUP_MAP (1)
+# define LEFTDOWN_MAP (2)
+# define RIGHTUP_MAP (3)
+# define RIGHTDOWN_MAP (4)
+
 //map.c
 void	setting_map_location(t_map *map, int *x, int *y, int x2, int y2);
 void	fill_squares(t_img *img, t_map *map, int x, int y, int color);

@@ -92,12 +92,6 @@ typedef struct s_texture
 	int		height;
 	t_img	img;
 }	t_texture;
-
-typedef enum e_info
-{
-    NO, SO, WE, EA, F, C
-} t_info;
-
 typedef struct s_god {
 	t_player player;
 	t_img	img;
@@ -119,7 +113,7 @@ typedef struct s_3d_info
 	int		wall_bottom;
 	int		correct_wall_top;
 	int		correct_wall_bottom;
-	t_info	direction;
+	int	direction;
 }	t_3d_info;
 
 #endif

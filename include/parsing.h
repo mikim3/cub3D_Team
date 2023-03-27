@@ -15,6 +15,14 @@
 # include <fcntl.h>
 # include "struct.h"
 
+// 읽어들일 정보
+# define NO (0)
+# define SO (1)
+# define WE (2)
+# define EA (3)
+# define F  (4)
+# define C  (5)
+
 // read.c
 void	read_file(t_god *god, char *filename);
 void	read_info(t_god *god, int fd);
