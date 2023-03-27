@@ -75,13 +75,13 @@ void    check_type(t_god *god, char * line)
 
 void    parse_texture(t_god *god, char *filename, int type)
 {
-    // (void)god; (void)filename; (void)type;
     char*  nl = ft_strrchr(filename, '\n');
     *nl = 0;
     god->texture[type].width = 0;god->texture[type].height = 0;
-    god->texture[type].texture = mlx_xpm_file_to_image(god->mlx, filename, &god->texture[type].width, &god->texture[type].height);
-    if (!god->texture[type].texture)
+    god->texture[type].img.img = mlx_xpm_file_to_image(god->mlx, filename, &god->texture[type].width, &god->texture[type].height);
+    if (!god->texture[type].img.img)
         exit_error("FAIL to Load Texture");
+    god->texture[type].img.data = (int*)mlx_get_data_addr(god->texture[type].img.img, &god->texture[type].img.bpp,&god->texture[type].img.line_size,&god->texture[type].img.endian);
 }
 
 void    parse_color(t_god *god, char *line, int type)

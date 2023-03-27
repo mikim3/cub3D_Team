@@ -84,6 +84,7 @@ void player_init(t_player *player, double x, double y, char direction)
 // 이 함수가 호출될때 한줄씩  3D화면이 그려짐
 void render_3D_project_walls(t_god *god, int ray_num)
 {
+	t_3d_info info;
 	// 지금 부채꼴 모양으로 시야를 받아들이기 떄문에 끝에 있는 부분(화면의 왼쪽과 오른쪽)과
 	// 그 부채꼴에 중간 부분은 차이가 있을수 밖에 없다 그래서 세상이 굴곡저 보인다.(어안렌즈 효과)
 	// 이를 해결하기위해 correct_distance로
@@ -91,34 +92,61 @@ void render_3D_project_walls(t_god *god, int ray_num)
 	// 벽에 딱 붙었을때 벽뒤가 보이는 버그 고침
 	if (god->ray.distance == 0)
 		god->ray.distance = 0.01;
-	//
-	double correct_distance = god->ray.distance * cos(god->ray.ray_angle - god->player.rotationAngle);
-	// double correct_distance = god->ray.distance * cos(god->ray.ray_angle);
-	//투영면까지의 거리
-	double distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
-	//투영면에 투사된 벽의 높이입니다.
-	double projected_wall_height = (TILE_SIZE / correct_distance) * distance_project_plane;
-	//벽 스트립의 높이입니다. 
-	int wallStripHeight = (int)projected_wall_height;
-
-	// 벽 스트립의 상단 픽셀 위치입니다.
-	int wall_top_pixel = (god->map.window_height / 2) - (wallStripHeight / 2);
-	wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
-
-	//벽 스트립의 하단 픽셀 위치입니다.
-	int wall_bottom_pixel = (god->map.window_height / 2) + (wallStripHeight / 2);
-	wall_bottom_pixel = wall_bottom_pixel > god->map.window_height ? god->map.window_height : wall_bottom_pixel;
-
-	int color = god->ray.wasHit_vertical ? VERT_WALL_COLOR : HORI_WALL_COLOR;
-
-	for (int y = wall_top_pixel; y < wall_bottom_pixel; y++)
+	
+	init_info(god, &info);
+	for (int y = info.correct_wall_top; y < info.correct_wall_bottom; y++)
 		for (int x = 0; x < WALL_STRIP_WIDTH; x++)
 			if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
-				god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = color;
-	draw_floor(god, ray_num, wall_bottom_pixel);
-	draw_sky(god, ray_num, wall_top_pixel);
+				god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = select_color(god, &info, y);
+	draw_floor(god, ray_num, info.correct_wall_bottom);
+	draw_sky(god, ray_num, info.correct_wall_top);
 }
 
+int		select_color(t_god *god, t_3d_info *info, int y)
+{
+	int r;
+	int c;
+	if (info->direction == WE || info->direction == EA)
+		c = ((int)god->ray.wall_hitY % TILE_SIZE);
+	else
+		c = ((int)god->ray.wall_hitX % TILE_SIZE);
+	c *= god->texture[info->direction].width / TILE_SIZE;
+	r = (y - info->wall_top) * god->texture[info->direction].height / info->wallStripHeight;
+	return (god->texture[info->direction].img.data[r * god->texture[info->direction].width + c]);
+}
+
+void	init_info(t_god *god, t_3d_info *info)
+{
+	info->correct_distance = god->ray.distance * cos(god->ray.ray_angle - god->player.rotationAngle);
+	//투영면까지의 거리
+	info->distance_project_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
+	//투영면에 투사된 벽의 높이입니다.
+	info->projected_wall_height = (TILE_SIZE / info->correct_distance) * info->distance_project_plane;
+	//벽 스트립의 높이입니다. 
+	info->wallStripHeight = (int)info->projected_wall_height;
+
+	// 벽 스트립의 상단 픽셀 위치입니다.
+	info->wall_top = (god->map.window_height / 2) - (info->wallStripHeight / 2);
+	info->correct_wall_top = info->wall_top;
+	if (info->wall_top < 0)
+		info->correct_wall_top = 0;
+
+	//벽 스트립의 하단 픽셀 위치입니다.
+	info->wall_bottom = (god->map.window_height / 2) + (info->wallStripHeight / 2);
+	info->correct_wall_bottom = info->wall_bottom;
+	if (info->wall_top > god->map.window_height)
+		info->correct_wall_bottom = god->map.window_height - 1;
+
+	if (god->ray.wasHit_vertical == TRUE && (god->player.x - god->ray.wall_hitX) > 0)
+		info->direction = WE;
+	else if (god->ray.wasHit_vertical == TRUE)
+		info->direction = EA;
+	else if ((god->player.y - god->ray.wall_hitY) > 0)
+		info->direction = NO;
+	else
+		info->direction = SO;
+
+}
 void	render_master(t_god *god)
 {
 	// player_init(&(god->player), &god->map); // 사용자 위치 초기화
