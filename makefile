@@ -6,7 +6,7 @@
 #    By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 20:01:35 by mikim3            #+#    #+#              #
-#    Updated: 2023/03/25 19:04:13 by mikim3           ###   ########.fr        #
+#    Updated: 2023/03/28 10:17:15 by mikim3           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS		=			\
 		render_master.c	\
 		render_wall.c	\
 		utils.c
+
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

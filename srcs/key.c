@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:37:07 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/24 10:29:21 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/28 09:54:09 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	key_press(int keycode, t_key *key)
 		key->right_rotation = TRUE;
 	if (keycode == KEY_LEFT)
 		key->left_rotation = TRUE;
-
 	if (keycode == KEY_ESC)
 		exit(0);
 	return (0);
