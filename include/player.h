@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 15:03:28 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 15:03:29 by soylee           ###   ########.fr       */
+/*   Created: 2023/03/27 20:12:37 by soylee            #+#    #+#             */
+/*   Updated: 2023/03/27 20:12:38 by soylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef PLAYER_H
+# define PLAYER_H
+# include "struct.h"
 
-// utils.c
-int		print_error(char *msg);
-void	exit_error(char *msg);
-int		check_extension(char *filename);
-void	ft_free(char **str);
+//player.c
+int	draw_player(t_god *god, t_player *player, t_img *img);
+int	update_player(t_god *god);
 
 #endif

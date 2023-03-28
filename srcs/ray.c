@@ -6,12 +6,28 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:12:28 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/27 18:50:31 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/28 10:20:06 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+void	ray_init(t_ray *ray, double rayAngle)
+{
+	ray->ray_angle = normalize_angle(rayAngle);
+	// ray->ray_angle = rayAngle;
+	ray->wall_hitX = 0;
+	ray->wall_hitY = 0;
+	ray->distance = 0;
+	ray->wasHit_vertical = FALSE;
+
+	// ray->ray_angle 광선의 진행하는 각도에 따라서 isRay_facing~~를 정해준다.
+	// 위왼쪽 위오른쪽 아래왼쪽 아래오른쪽 이렇게 값을 가질수 있는거임
+	ray->isRay_facingDown = ray->ray_angle > 0 && ray->ray_angle < M_PI;
+	ray->isRay_facingUp = !ray->isRay_facingDown;
+	ray->isRay_facingRight = ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI;
+	ray->isRay_facingLeft = !ray->isRay_facingRight;
+}
 
 // (9)에서 바꿈
 // void	draw_ray(t_god *god)
@@ -171,7 +187,7 @@ void	draw_one_ray(t_god *god, double angle, int i)
 	}
 	// draw_line(god, god->player.x, god->player.y, god->ray.wall_hitX, god->ray.wall_hitY);
 	draw_line(god, god->ray.wall_hitX - god->player.x, god->ray.wall_hitY - god->player.y);
-	render_3D_project_walls(god, i);
+	render_3d_project_walls(god, i);
 }
 
 // 0 ~ 2PI 값을 벗어나면 값을 보정해준다.

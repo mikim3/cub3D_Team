@@ -6,7 +6,7 @@
 #    By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 20:01:35 by mikim3            #+#    #+#              #
-#    Updated: 2023/03/27 18:51:39 by mikim3           ###   ########.fr        #
+#    Updated: 2023/03/28 10:17:15 by mikim3           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,17 @@ INC			= include
 SRCS_DIR	= srcs
 SRCS		=			\
 		main.c			\
-		map.c			\
-		player.c		\
-		key.c			\
-		render_master.c	\
-		ray.c			\
-		utils.c			\
-		parsing.c		\
 		check_map.c		\
-		init.c
+		key.c			\
+		map.c			\
+		parsing.c		\
+		player.c		\
+		ray.c			\
+		read.c			\
+		render_master.c	\
+		render_wall.c	\
+		utils.c
+
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
