@@ -52,10 +52,10 @@ int	select_color(t_god *god, t_3d_info *info, int idx)
 	int	c;
 
 	if (info->direction == WE || info->direction == EA)
-		c = ((int)god->ray.wall_hitY % TILE_SIZE);
+		c = (int)god->ray.wall_hitY;
 	else
-		c = ((int)god->ray.wall_hitX % TILE_SIZE);
-	c *= god->texture[info->direction].width / TILE_SIZE;
+		c = (int)god->ray.wall_hitX;
+	c = (c % TILE_SIZE) * god->texture[info->direction].width / TILE_SIZE;
 	r = (idx) * god->texture[info->direction].height / info->wallStripHeight;
 	return (god->texture[info->direction].img.data \
 		[r * god->texture[info->direction].width + c]);

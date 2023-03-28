@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __CUB3D_H__
-# define __CUB3D_H__
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <float.h>
-#include "mlx.h"
-#include "libft.h"
+# define _USE_MATH_DEFINES
+# include <math.h>
+# include <float.h>
+# include "mlx.h"
+# include "libft.h"
 
 # include "struct.h"
 # include "key.h"
