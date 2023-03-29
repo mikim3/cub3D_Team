@@ -45,7 +45,7 @@ APIFLAGE	= -framework OpenGL -framework Appkit
 
 all			:	$(NAME)
 
-$(NAME)		:	$(OBJS_DIR) $(OBJS) $(MLX) $(LIBFT)
+$(NAME)		:	$(OBJS_DIR) $(OBJS) $(MLX_DIR)/$(MLX) $(LIBFT_DIR)/$(LIBFT)
 		$(CC) $(LIBS) $(APIFLAGE) -o $(NAME) $(OBJS)
 
 $(OBJS_DIR)	:
@@ -54,10 +54,10 @@ $(OBJS_DIR)	:
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	$(CC) $(IFLAGS) $(CFLAGS) -c $< -o $@
 
-$(MLX):
+$(MLX_DIR)/$(MLX):
 	make -C $(MLX_DIR)
 
-$(LIBFT):
+$(LIBFT_DIR)/$(LIBFT):
 	make -C $(LIBFT_DIR)
 
 clean		:

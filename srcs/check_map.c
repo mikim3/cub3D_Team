@@ -74,7 +74,7 @@ void	check_around_wall(t_map *map)
 void	check_space_pos(t_map *map, int r, int c)
 {
 	if (r == 0 || r == map->map_rows - 1 || c == 0 || c == map->map_cols - 1)
-		exit_error("map's outline is space");
+		exit_error("wall error");
 	if (map->map_matrix[r - 1][c] == -1 || map->map_matrix[r + 1][c] == -1)
 		exit_error("wall error");
 	if (map->map_matrix[r][c - 1] == -1 || map->map_matrix[r][c + 1] == -1)

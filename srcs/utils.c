@@ -12,16 +12,10 @@
 
 #include "cub3D.h"
 
-int	print_error(char *msg)
+void	exit_error(char *msg)
 {
 	ft_putstr_fd("Error: ", STDERR_FILENO);
 	ft_putendl_fd(msg, STDERR_FILENO);
-	return (1);
-}
-
-void	exit_error(char *msg)
-{
-	print_error(msg);
 	exit(1);
 }
 
@@ -47,4 +41,32 @@ void	ft_free(char **str)
 		i++;
 	}
 	free(str);
+}
+
+int	ft_isdigit_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
+int	is_emptyline(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isspace(line[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }

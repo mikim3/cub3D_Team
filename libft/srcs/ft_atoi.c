@@ -14,14 +14,6 @@
 #define INT_MAX 2147483647
 #define INT_MIN -2147483648
 
-static int	ft_isspace(int c)
-{
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	else
-		return (0);
-}
-
 static int	check_sign(const char *str, int *idx)
 {
 	int	sign;
