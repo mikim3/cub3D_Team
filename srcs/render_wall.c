@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 21:16:23 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/27 21:16:24 by soylee           ###   ########.fr       */
+/*   Updated: 2023/03/29 12:47:42 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	render_3d_project_walls(t_god *god, int ray_num)
 		x = 0;
 		while (x < WALL_STRIP_WIDTH)
 		{
+			// (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA
+			// EXC_BAD_ACCESS (code=1, address=0x129ecc614)  y 값이 갑자기 176532가 나옴
 			if (god->img.data[god->map.window_width * y + \
 				(x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
 				god->img.data[god->map.window_width * y + (x + ray_num * \
