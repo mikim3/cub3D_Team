@@ -127,20 +127,22 @@ void	get_map_info(t_map *map, char **str_map)
 	int	i;
 	int	max;
 	int	len;
+	int	tag;
 
-	i = 0;
+	i = -1;
 	max = -1;
-	while (str_map[i])
+	tag = 0;
+	while (str_map[++i])
 	{
 		len = ft_strlen(str_map[i]);
+		tag += 1;
+		if (!is_emptyline(str_map[i]))
+			tag = 0;
 		if (max < len)
 			max = len;
-		i++;
 	}
-	if (max == -1)
-		exit_error("There is no map.");
 	map->map_cols = max;
-	map->map_rows = i;
+	map->map_rows = i - tag;
 	map->window_width = map->map_cols * TILE_SIZE;
 	map->window_height = map->map_rows * TILE_SIZE;
 	map->ray_count = map->window_width;

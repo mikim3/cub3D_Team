@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 15:03:28 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 15:03:29 by soylee           ###   ########.fr       */
+/*   Created: 2023/03/29 21:38:29 by soylee            #+#    #+#             */
+/*   Updated: 2023/03/29 21:38:31 by soylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-// utils.c
-void	exit_error(char *msg);
-int		check_extension(char *filename);
-void	ft_free(char **str);
-int		ft_isdigit_str(char *str);
-int		is_emptyline(char *line);
-
-#endif
+int	ft_isspace(int c)
+{
+	if (c == '\t' || c == '\n' || c == '\v' || \
+		c == '\f' || c == '\r' || c == ' ')
+		return (1);
+	return (0);
+}

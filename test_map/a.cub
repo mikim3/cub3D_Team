@@ -1,17 +1,9 @@
-F 50,50,50
-
-EA ./asset/CRATE_2G.xpm
-
-C 200,200,200
-
-WE ./asset/CRATE_2L.xpm
-
 NO ./asset/CRATE_2D.xpm
-
-
+EA ./asset/CRATE_2G.xpm
 SO ./asset/CRATE_2A.xpm
-
-
+WE ./asset/CRATE_2L.xpm
+F 50,50,50
+C 200,200,200
 
 11111111111111111111
 10001000000000001001
