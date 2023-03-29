@@ -18,5 +18,6 @@ int		print_error(char *msg);
 void	exit_error(char *msg);
 int		check_extension(char *filename);
 void	ft_free(char **str);
+int		ft_isdigit_str(char *str);
 
 #endif

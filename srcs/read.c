@@ -28,6 +28,7 @@ void	read_info(t_god *god, int fd)
 {
 	char	*line;
 	int		cnt;
+	char	*nl;
 
 	cnt = 0;
 	while (cnt < 6)
@@ -37,6 +38,9 @@ void	read_info(t_god *god, int fd)
 			exit_error("read_info");
 		if (ft_strncmp(line, "\n", 2) != 0)
 		{
+			nl = ft_strrchr(line, '\n');
+			if (nl)
+				*nl = 0;
 			check_type(god, line);
 			cnt++;
 		}

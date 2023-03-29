@@ -48,3 +48,17 @@ void	ft_free(char **str)
 	}
 	free(str);
 }
+
+int	ft_isdigit_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
