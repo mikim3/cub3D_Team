@@ -82,19 +82,24 @@ void	render_map(t_god *god)
 
 int	is_wall(t_map *map, double x, double y)
 {
-	int xX;
-	int yY;
+	int	idx_x;
+	int	idx_y;
 
 	if (x < 0 || x > map->window_width || y < 0 || y > map->window_height)
 	{
 		return (1);
 	}
-	// floor는 소수점 무시 그냥 int형 값으로 바꾸려고 넣음
-	xX = floor(x / TILE_SIZE);
-	yY = floor(y / TILE_SIZE);
-
-	//빈공간(0)이 아니면 벽
-	return (map->map_matrix[yY][xX] != 0);
+	idx_x = x;
+	idx_y = y;
+	if (map->map_matrix[idx_y / TILE_SIZE][idx_x / TILE_SIZE] == 1)
+		return (TRUE);
+	if (map->map_matrix[(idx_y + 1) / TILE_SIZE][(idx_x + 1) / TILE_SIZE] == 1 \
+	&& map->map_matrix[(idx_y - 1) / TILE_SIZE][(idx_x - 1) / TILE_SIZE] == 1)
+		return (TRUE);
+	if (map->map_matrix[(idx_y - 1) / TILE_SIZE][(idx_x + 1) / TILE_SIZE] == 1 \
+	&& map->map_matrix[(idx_y + 1) / TILE_SIZE][(idx_x - 1) / TILE_SIZE] == 1)
+		return (TRUE);
+	return (FALSE);
 }
 
 // (14)
