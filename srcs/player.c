@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:16:26 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/28 09:55:34 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/29 11:41:45 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int	update_player(t_god *god)
 
 	// (14) 보고 !check_edge(god, &p1, &p2) && 추가할지 고민하기
 	// 벽이면 이동 불가
-	if (!is_wall(&(god->map), newPlayerX, newPlayerY))
+	if (!is_wall(&(god->map), newPlayerX, newPlayerY) && !check_edge(god, god->player.x, god->player.y, newPlayerX, newPlayerY))
 	{
 		//벽아니면 현재좌표를 이동
 		god->player.x = newPlayerX;
