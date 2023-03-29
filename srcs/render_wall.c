@@ -23,13 +23,14 @@ void	init_info(t_god *god, t_3d_info *info)
 	info->wallStripHeight = (int)info->projected_wall_height;
 	info->wall_top = (god->map.window_height / 2) - (info->wallStripHeight / 2);
 	info->correct_wall_top = info->wall_top;
-	if (info->wall_top < 0)
-		info->correct_wall_top = 0;
 	info->wall_bottom = (god->map.window_height / 2) \
 		+ (info->wallStripHeight / 2);
 	info->correct_wall_bottom = info->wall_bottom;
-	if (info->wall_top > god->map.window_height)
+	if (info->wallStripHeight >= god->map.window_height)
+	{
+		info->correct_wall_top = 0;
 		info->correct_wall_bottom = god->map.window_height - 1;
+	}
 	check_wall_direction(god, info);
 }
 
@@ -61,6 +62,8 @@ int	select_color(t_god *god, t_3d_info *info, int idx)
 		[r * god->texture[info->direction].width + c]);
 }
 
+// (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA
+// EXC_BAD_ACCESS (code=1, address=0x129ecc614)  y 값이 갑자기 176532가 나옴
 void	render_3d_project_walls(t_god *god, int ray_num)
 {
 	t_3d_info	info;
