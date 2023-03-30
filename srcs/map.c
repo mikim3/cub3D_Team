@@ -6,14 +6,12 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:23:58 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/29 11:40:51 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/30 20:29:12 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// 헤더에 define MAP_LOCATION 값에 따라
-// 미니맵을 define 된거에 맞게 설정해주는 함수
 void	setting_map_location(t_map *map, int *x, int *y, int x2, int y2)
 {
 	if (MAP_LOCATION == LEFTUP_MAP)
@@ -71,9 +69,9 @@ void	render_map(t_god *god)
 		while (col < god->map.map_cols)
 		{
 			if (god->map.map_matrix[row][col] == 1)
-				fill_squares(&god->img, &god->map, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), TILE_2D_COLOR);
+				fill_squares(&god->img, &god->map, (int)(TILE_SIZE * col), (int)(TILE_SIZE * row), TILE_2D_COLOR);
 			else if (god->map.map_matrix[row][col] == 0)
-				fill_squares(&god->img, &god->map, (int)(MINI_SCALE * TILE_SIZE * col), (int)(MINI_SCALE * TILE_SIZE * row), WALL_2D_COLOR);
+				fill_squares(&god->img, &god->map, (int)(TILE_SIZE * col), (int)(TILE_SIZE * row), WALL_2D_COLOR);
 			col++;
 		}
 		row++;
