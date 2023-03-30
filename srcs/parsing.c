@@ -14,10 +14,6 @@
 
 void	parse_texture(t_god *god, char *filename, int type)
 {
-	char	*nl;
-
-	nl = ft_strrchr(filename, '\n');
-	*nl = 0;
 	god->texture[type].width = 0;
 	god->texture[type].height = 0;
 	god->texture[type].img.img = mlx_xpm_file_to_image(god->mlx, filename, \
@@ -34,7 +30,6 @@ void	parse_color(t_god *god, char *line, int type)
 	int		color;
 	char	**str_num;
 
-	line[ft_strlen(line) - 1] = 0;
 	str_num = ft_split(line, ',');
 	if (!str_num)
 		exit_error("ft_split");
@@ -62,8 +57,11 @@ int	get_color(char **str_num)
 			exit_error("lack of color");
 		color <<= 8;
 		num = ft_atoi(str_num[i]);
-		if (num == 0 && ft_strncmp(str_num[i], "0", 1))
+		if (!ft_isdigit_str(str_num[i]) || \
+			(num == 0 && ft_strncmp(str_num[i], "0", 1)))
 			exit_error("non-digit");
+		if (num < 0 || num > 255)
+			exit_error("color: Out of Range!");
 		color |= num;
 		i++;
 	}

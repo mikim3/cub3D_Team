@@ -53,9 +53,9 @@ int	main(int ac, char **av)
 
 	atexit(do_exit);
 	if (ac != 2)
-		return (print_error("Input a map's file name."));
+		exit_error("Input a map's file name.");
 	if (!check_extension(av[1]))
-		return (print_error("Input the \".cub\" extension file."));
+		exit_error("Input the \".cub\" extension file.");
 	god.mlx = mlx_init();
 	read_file(&god, av[1]);
 	main_init(&god);
