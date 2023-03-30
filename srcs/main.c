@@ -41,21 +41,16 @@ static void	main_init(t_god *god)
 			&(god->img.line_size), &(god->img.endian));
 }
 
-void	do_exit(void)
-{
-	system("leaks -q cub3D");
-}
-
 int	main(int ac, char **av)
 {
 	t_god	god;
 	int		i;
 
-	atexit(do_exit);
 	if (ac != 2)
-		exit_error("Input a map's file name.");
-	if (!check_extension(av[1]))
-		exit_error("Input the \".cub\" extension file.");
+	{
+		ft_putendl_fd("Input A map's file name.", STDOUT_FILENO);
+		return (1);
+	}
 	god.mlx = mlx_init();
 	read_file(&god, av[1]);
 	main_init(&god);
