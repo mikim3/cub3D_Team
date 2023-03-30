@@ -29,14 +29,11 @@ void	read_info(t_god *god, int fd);
 void	read_map(t_god *god, int fd);
 char	*get_line_map(int fd);
 void	check_type(t_god *god, char *line);
-void	get_map_info(t_map *map, char **str_map);
 
 //parsing.c
 void	parse_texture(t_god *god, char *filename, int type);
 void	parse_color(t_god *god, char *line, int type);
-int		get_color(char **str_num);
-void	parsing_map(t_god *god, char **str_map);
-void	fill_map(t_god *god, char *line_map, int i);
+void	parse_map(t_god *god, char **str_map);
 
 //check_map.c
 void	check_valid_char(t_god *god, char **str);

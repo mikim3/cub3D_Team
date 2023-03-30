@@ -43,32 +43,7 @@ void	parse_color(t_god *god, char *line, int type)
 	ft_free(str_num);
 }
 
-int	get_color(char **str_num)
-{
-	int	color;
-	int	num;
-	int	i;
-
-	i = 0;
-	color = 0;
-	while (i < 3)
-	{
-		if (!str_num[i])
-			exit_error("lack of color");
-		color <<= 8;
-		num = ft_atoi(str_num[i]);
-		if (!ft_isdigit_str(str_num[i]) || \
-			(num == 0 && ft_strncmp(str_num[i], "0", 1)))
-			exit_error("non-digit");
-		if (num < 0 || num > 255)
-			exit_error("color: Out of Range!");
-		color |= num;
-		i++;
-	}
-	return (color);
-}
-
-void	parsing_map(t_god *god, char **str_map)
+void	parse_map(t_god *god, char **str_map)
 {
 	int	i;
 
@@ -84,22 +59,5 @@ void	parsing_map(t_god *god, char **str_map)
 			exit_error("Fail to calloc");
 		fill_map(god, str_map[i], i);
 		i++;
-	}
-}
-
-void	fill_map(t_god *god, char *line_map, int i)
-{
-	int	j;
-	int	len;
-
-	j = 0;
-	len = ft_strlen(line_map);
-	while (j < god->map.map_cols)
-	{
-		if (j >= len || line_map[j] == ' ')
-			god->map.map_matrix[i][j] = -1;
-		else if (line_map[j] == '1')
-			god->map.map_matrix[i][j] = 1;
-		j++;
 	}
 }

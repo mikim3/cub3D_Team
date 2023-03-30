@@ -25,6 +25,7 @@ SRCS		=			\
 		read.c			\
 		render_master.c	\
 		render_wall.c	\
+		parsing_utils.c	\
 		utils.c
 
 

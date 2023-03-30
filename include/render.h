@@ -18,7 +18,7 @@
 # define X_EVENT_KEY_PRESS			(2)
 # define X_EVENT_KEY_RELEASE		(3)
 # define X_EVENT_KEY_EXIT			(17)
- 
+
 //player.c 에 위치??
 void	player_init(t_player *player, double x, double y, char direction);
 
