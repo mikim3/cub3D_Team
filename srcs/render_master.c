@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:25:57 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/29 11:23:31 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/30 20:12:27 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	render_master(t_god *god)
 	//키누를 때 어떤 함수를 사용할지 결정
 	mlx_hook(god->win, X_EVENT_KEY_PRESS, (1L << 0), &key_press, &(god->key));
 	mlx_hook(god->win, X_EVENT_KEY_RELEASE, (1L << 1), &key_release, &(god->key));
+	mlx_hook(god->win, X_EVENT_KEY_EXIT, 0, &key_exit, god);
 
 	// X_EVENT_KEY_EXIT 제대로 작동안함 사실 따로 만들 필요 없긴함
 	// mlx_hook(god->win, X_EVENT_KEY_EXIT, 0, &key_exit, god);

@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:37:07 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/28 09:54:09 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/30 20:11:00 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,11 @@ int	key_release(int keycode, t_key *key)
 		key->left_rotation = FALSE;
 	if (keycode == KEY_ESC)
 		exit(0);
+	return (0);
+}
+
+int	key_exit(void)
+{
+	exit(0);
 	return (0);
 }
