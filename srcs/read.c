@@ -16,6 +16,8 @@ void	read_file(t_god *god, char *filename)
 {
 	int	fd;
 
+	if (!check_extension(filename))
+		exit_error("Input the \".cub\" extension file.");
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		exit_error("Fail to open file.");
@@ -59,7 +61,7 @@ void	read_map(t_god *god, int fd)
 		exit_error("Fail to split map.");
 	free(line);
 	check_valid_char(god, str_map);
-	parsing_map(god, str_map);
+	parse_map(god, str_map);
 	check_around_wall(&god->map);
 	ft_free(str_map);
 }
@@ -120,30 +122,4 @@ void	check_type(t_god *god, char *line)
 		i++;
 	}
 	exit_error("Mismatch type");
-}
-
-void	get_map_info(t_map *map, char **str_map)
-{
-	int	i;
-	int	max;
-	int	len;
-	int	tag;
-
-	i = -1;
-	max = -1;
-	tag = 0;
-	while (str_map[++i])
-	{
-		len = ft_strlen(str_map[i]);
-		tag += 1;
-		if (!is_emptyline(str_map[i]))
-			tag = 0;
-		if (max < len)
-			max = len;
-	}
-	map->map_cols = max;
-	map->map_rows = i - tag;
-	map->window_width = map->map_cols * TILE_SIZE;
-	map->window_height = map->map_rows * TILE_SIZE;
-	map->ray_count = map->window_width;
 }

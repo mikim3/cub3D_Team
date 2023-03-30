@@ -85,7 +85,8 @@ int	is_wall(t_map *map, double x, double y)
 	int	idx_x;
 	int	idx_y;
 
-	if (x < 0 || x > map->window_width || y < 0 || y > map->window_height)
+	if (x < 1 || x > map->window_width - 1 \
+		|| y < 1 || y > map->window_height - 1)
 	{
 		return (1);
 	}
