@@ -6,15 +6,12 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:25:57 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/28 09:56:43 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/30 20:12:27 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// 그리는 녀석들은 반복을 해줘야 한다.
-// 그렇지 않으면 미리 그려져 있는 배경에 캐릭터가 움직임을 반복하면 그 플레이어의 그 전 위치가 맵위에
-// 계속 남아 있을 것이다. 무엇을 그리든 마찬가지다.
 int	ft_loop(t_god *god)
 {
 	// 3D를 그릴  범위를 결정해주기
@@ -49,16 +46,6 @@ void render_player(t_god *god)
 	draw_player(god,&(god->player),&god->img);
 }
 
-// void player_init(t_player *player, t_map *map)
-// {
-// 	player->x = map->window_width / 2;
-// 	player->y = map->window_height / 2;
-// 	player->thickness = PLAYER_THICKNESS;
-// 	player->rotationAngle = M_PI / 2; // 0도가 오른쪽 90도면 아래
-// 	player->walkSpeed = 1;
-// 	player->turnSpeed = 1.5 * (M_PI / 180); //
-// }
-
 void	player_init(t_player *player, double x, double y, char direction)
 {
 	player->x = (x + 0.5) * TILE_SIZE;
@@ -84,6 +71,7 @@ void	render_master(t_god *god)
 	//키누를 때 어떤 함수를 사용할지 결정
 	mlx_hook(god->win, X_EVENT_KEY_PRESS, (1L << 0), &key_press, &(god->key));
 	mlx_hook(god->win, X_EVENT_KEY_RELEASE, (1L << 1), &key_release, &(god->key));
+	mlx_hook(god->win, X_EVENT_KEY_EXIT, 0, &key_exit, god);
 
 	// X_EVENT_KEY_EXIT 제대로 작동안함 사실 따로 만들 필요 없긴함
 	// mlx_hook(god->win, X_EVENT_KEY_EXIT, 0, &key_exit, god);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 21:34:28 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/27 21:34:28 by soylee           ###   ########.fr       */
+/*   Updated: 2023/03/29 11:43:15 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	render_map(t_god *god);
 int		is_wall(t_map *map, double x, double y);
 int		draw_sky(t_god *god, int ray_num, int wall_top_pixel);
 int		draw_floor(t_god *god, int ray_num, int wall_bottom_pixel);
+int     check_edge(t_god *god, double x1, double x2, double y1, double y2);
 
 #endif
