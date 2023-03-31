@@ -20,6 +20,9 @@ void	ft_free(char **str);
 int		ft_isdigit_str(char *str);
 int		is_emptyline(char *line);
 
+// utils2.c
+int		three_operator(int condition, int trueValue, int falseValue);
+
 // parsing_utils.c
 void	get_map_info(t_map *map, char **str_map);
 int		get_color(char **str_num);

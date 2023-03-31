@@ -50,33 +50,36 @@ void	cal_horz_ray(t_cub *cub, t_dpable_ray *horz)
 	horz->found_wallhit = FALSE;
 	horz->wall_hitx = 0;
 	horz->wall_hity = 0;
-
-	horz->yintercept = floor(cub->player.y  / TILE_SIZE) * TILE_SIZE;
-	horz->yintercept += cub->ray.isray_facingdown ? TILE_SIZE : 0;
+	horz->yintercept = floor(cub->player.y / TILE_SIZE) * TILE_SIZE;
+	horz->yintercept += three_operator(cub->ray.isray_facingdown, TILE_SIZE, 0);
 	horz->xintercept = cub->player.x + (horz->yintercept \
 		- cub->player.y) / tan(cub->ray.ray_angle);
 	horz->ystep = TILE_SIZE;
-	horz->ystep *= cub->ray.isray_facingup ? -1 : 1;
+	horz->ystep *= three_operator(cub->ray.isray_facingup, -1, 1);
 	horz->xstep = TILE_SIZE / tan(cub->ray.ray_angle);
-	horz->xstep *= (cub->ray.isray_facingleft && horz->xstep > 0) ? -1 : 1;
-	horz->xstep *= (cub->ray.isray_facingright && horz->xstep < 0) ? -1 : 1;
-	cal_ray(cub, horz, 0, cub->ray.isray_facingup ? -1 : 0);
+	horz->xstep *= three_operator(cub->ray.isray_facingleft \
+		&& horz->xstep > 0, -1, 1);
+	horz->xstep *= three_operator(cub->ray.isray_facingright \
+		&& horz->xstep < 0, -1, 1);
+	cal_ray(cub, horz, 0, three_operator(cub->ray.isray_facingup, -1, 0));
 }
 
-void cal_vert_ray(t_cub *cub, t_dpable_ray *vert)
+void	cal_vert_ray(t_cub *cub, t_dpable_ray *vert)
 {
 	vert->found_wallhit = FALSE;
 	vert->wall_hitx = 0;
 	vert->wall_hity = 0;
-
 	vert->xintercept = floor(cub->player.x  / TILE_SIZE) * TILE_SIZE;
-	vert->xintercept += cub->ray.isray_facingright ? TILE_SIZE : 0;
-	vert->yintercept = cub->player.y + (vert->xintercept - cub->player.x) * tan(cub->ray.ray_angle);
+	vert->xintercept += three_operator(cub->ray.isray_facingright, \
+		TILE_SIZE, 0);
+	vert->yintercept = cub->player.y + \
+		(vert->xintercept - cub->player.x) * tan(cub->ray.ray_angle);
 	vert->xstep = TILE_SIZE;
-	vert->xstep *= cub->ray.isray_facingleft ? -1 : 1;
+	vert->xstep *= three_operator(cub->ray.isray_facingleft, -1, 1);
 	vert->ystep = TILE_SIZE * tan(cub->ray.ray_angle);
-	vert->ystep *= (cub->ray.isray_facingup && vert->ystep > 0) ? -1 : 1;
-	vert->ystep *= (cub->ray.isray_facingdown && vert->ystep < 0) ? -1 : 1;
-
-	cal_ray(cub, vert, cub->ray.isray_facingleft ? -1 : 0, 0);
+	vert->ystep *= three_operator((cub->ray.isray_facingup && \
+		vert->ystep > 0), -1, 1);
+	vert->ystep *= three_operator((cub->ray.isray_facingdown && \
+		vert->ystep < 0), -1, 1);
+	cal_ray(cub, vert, three_operator(cub->ray.isray_facingleft, -1, 0), 0);
 }

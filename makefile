@@ -27,6 +27,7 @@ SRCS		=			\
 		render_wall.c	\
 		parsing_utils.c	\
 		utils.c			\
+		utils2.c		\
 		cal_ray.c		\
 		ray_util.c		\
 		draw_background.c
