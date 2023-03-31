@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 19:20:35 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 16:41:42 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	main_init(t_cub *cub)
 {
 	cub->win = mlx_new_window(cub->mlx, cub->map.window_width, \
-	cub->map.window_height, "title");
+	cub->map.window_height, "cub_2dot5d");
 	key_init(&(cub->key));
 	cub->img.ptr = mlx_new_image(cub->mlx, cub->map.window_width, \
 	cub->map.window_height);

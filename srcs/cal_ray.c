@@ -6,14 +6,12 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:37:55 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/31 14:26:36 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 16:42:26 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// 실질적으로 벽의 위치를 찾는 함수
-// x_adjust, y_adjust는 플레이어가 왼쪽이랑 위쪽 볼때 벽이 밀려서 나타나는 현상이 있이서 값을 보정해주었다.
 void	cal_ray(t_cub *cub, t_dpable_ray *horz_or_vert, \
 			int x_adjust, int y_adjust)
 {
@@ -42,9 +40,6 @@ void	cal_ray(t_cub *cub, t_dpable_ray *horz_or_vert, \
 	cal_distance(cub, horz_or_vert);
 }
 
-// 양옆으로 쭉 그어진 행모양 기준선
-// cal_ray함수에서 벽의위치를 찾는데 쓰일
-// xintercept, yintercept, xstep, ystep의 값을 정해줌
 void	cal_horz_ray(t_cub *cub, t_dpable_ray *horz)
 {
 	horz->found_wallhit = FALSE;

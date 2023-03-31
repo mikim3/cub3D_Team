@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 20:12:44 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/31 15:06:24 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 16:45:16 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 # define X_EVENT_KEY_RELEASE		3
 # define X_EVENT_KEY_EXIT			17
 
-//player.c 에 위치??
-void	player_init(t_player *player, double x, double y, char direction);
+//player.c
 
 //render_master.c
 int		ft_loop(t_cub *cub);
