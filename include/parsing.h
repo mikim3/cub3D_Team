@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:16:07 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 16:44:43 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <fcntl.h>
 # include "struct.h"
 
-// 읽어들일 정보
 # define NO 0
 # define SO 1
 # define WE 2

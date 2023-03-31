@@ -6,11 +6,28 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:16:26 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/31 15:36:13 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 16:46:34 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	player_init(t_player *player, double x, double y, char direction)
+{
+	player->x = (x + 0.5) * TILE_SIZE;
+	player->y = (y + 0.5) * TILE_SIZE;
+	player->thickness = PLAYER_THICKNESS;
+	if (direction == 'N')
+		player->rotation_angle = M_PI * 1.5;
+	else if (direction == 'E')
+		player->rotation_angle = 0;
+	else if (direction == 'W')
+		player->rotation_angle = M_PI;
+	else
+		player->rotation_angle = M_PI * 0.5;
+	player->walk_speed = WALKSPEED;
+	player->turn_speed = TURNSPEED;
+}
 
 int	draw_player(t_cub *cub, t_player *player, t_img *img)
 {

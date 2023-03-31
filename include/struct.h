@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:02:22 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/31 15:34:11 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 16:47:11 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_player {
 	double	moveside;
 }				t_player;
 
-// 파싱한 맵에 대한 정보를 넣어줄 구조체
 typedef struct s_map
 {
 	int		map_rows;
@@ -48,7 +47,6 @@ typedef struct s_map
 	int		sky_color;
 }				t_map;
 
-//이동 및 방향
 typedef struct s_key
 {
 	int	up;
