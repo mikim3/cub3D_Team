@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 21:16:23 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/31 15:11:41 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 15:23:42 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ void	init_info(t_cub *cub, t_3d_info *info)
 	info->correct_distance = cub->ray.distance \
 		* cos(cub->ray.ray_angle - cub->player.rotation_angle);
 	info->distance_project_plane = \
-		(cub->map.window_width / 2) / tan(FOV_ANGLE / 2);
+		(cub->map.window_width / 2) / tan(RAY_RANGE / 2);
 	info->projected_wall_height = \
 		(TILE_SIZE / info->correct_distance) * info->distance_project_plane;
 	info->wall_strip_height = (int)info->projected_wall_height;
-	info->wall_top = (cub->map.window_height / 2) - (info->wall_strip_height / 2);
+	info->wall_top = (cub->map.window_height / 2) - \
+	(info->wall_strip_height / 2);
 	info->correct_wall_top = info->wall_top;
 	info->wall_bottom = (cub->map.window_height / 2) \
 		+ (info->wall_strip_height / 2);
@@ -62,8 +63,6 @@ int	select_color(t_cub *cub, t_3d_info *info, int idx)
 		[r * cub->texture[info->direction].width + c]);
 }
 
-// (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA
-// EXC_BAD_ACCESS (code=1, address=0x129ecc614)  y 값이 갑자기 176532가 나옴
 void	render_3d_project_walls(t_cub *cub, int ray_num)
 {
 	t_3d_info	info;

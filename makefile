@@ -6,7 +6,7 @@
 #    By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 20:01:35 by mikim3            #+#    #+#              #
-#    Updated: 2023/03/31 13:44:50 by mikim3           ###   ########.fr        #
+#    Updated: 2023/03/31 15:28:56 by mikim3           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRCS		=			\
 		parsing_utils.c	\
 		utils.c			\
 		cal_ray.c		\
-		ray_util.c
+		ray_util.c		\
+		draw_background.c
 
 
 OBJS_DIR	= objs

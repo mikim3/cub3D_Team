@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:23:58 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/31 14:47:18 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 15:35:28 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,10 @@ void	fill_squares(t_img *img, t_map *map, int x, int y, int color)
 	}
 }
 
-// 2D맵그리기
-void	render_map(t_cub *cub)
+void	render_2d_map(t_cub *cub)
 {
-	int col;
-	int row;
+	int	col;
+	int	row;
 
 	row = 0;
 	while (row < cub->map.map_rows)
@@ -115,7 +114,6 @@ int	check_edge(t_cub *cub, double x1, double y1, t_d_point new_p)
 	p1.y = (int)(new_p.x / TILE_SIZE) - (int)(new_p.y / TILE_SIZE);
 	p2.x = (int)(x1 / TILE_SIZE);
 	p2.y = (int)(new_p.x / TILE_SIZE);
-
 	if (p1.x == 1 && p1.y == 1)
 		return (ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]) == NULL);
 	if (p1.x == 1 && p1.y == -1)
@@ -125,44 +123,4 @@ int	check_edge(t_cub *cub, double x1, double y1, t_d_point new_p)
 	if (p1.x == -1 && p1.y == -1)
 		return (ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]) == NULL);
 	return (FALSE);
-}
-
-int	draw_sky(t_cub *cub, int ray_num, int wall_top_pixel)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y++ < wall_top_pixel)
-	{
-		x = 0;
-		while (x++ < WALL_STRIP_WIDTH)
-		{
-			if (cub->img.data[cub->map.window_width * y + \
-				(x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
-				cub->img.data[cub->map.window_width * y + \
-				(x + ray_num * WALL_STRIP_WIDTH)] = cub->map.sky_color;
-		}
-	}
-	return (0);
-}
-
-int draw_floor(t_cub *cub, int ray_num, int wall_bottom_pixel)
-{
-	int	y;
-	int	x;
-
-	y = wall_bottom_pixel;
-	while (y++ < cub->map.window_height)
-	{
-		x = 0;
-		while (x++ < WALL_STRIP_WIDTH)
-		{
-			if (cub->img.data[cub->map.window_width * y + \
-			(x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
-				cub->img.data[cub->map.window_width * y + \
-				(x + ray_num * WALL_STRIP_WIDTH)] = cub->map.floor_color;
-		}
-	}
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:02:22 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/31 14:45:53 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 15:34:11 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ typedef struct s_key
 	int	left_rotation;
 }				t_key;
 
-// disposable ray
-// 광선을 한개 그릴 때만 유효한 요소들이라는 뜻
 typedef struct s_dpable_ray {
 	double	xintercept;
 	double	yintercept;
@@ -71,7 +69,6 @@ typedef struct s_dpable_ray {
 	double	wall_hity;
 	double	distance;
 }		t_dpable_ray;
-
 
 typedef struct s_ray {
 	double	ray_angle;
@@ -125,9 +122,5 @@ typedef struct s_d_point {
 	double	x;
 	double	y;
 }	t_d_point;
-
-
-
-
 
 #endif

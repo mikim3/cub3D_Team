@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:12:28 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/31 15:11:19 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 15:39:06 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	ray_init(t_ray *ray, double rayAngle)
 	ray->wall_hitx = 0;
 	ray->wall_hity = 0;
 	ray->distance = 0;
-	ray->wasHit_vertical = FALSE;
-	ray->isRay_facingDown = ray->ray_angle > 0 && ray->ray_angle < M_PI;
-	ray->isRay_facingUp = !ray->isRay_facingDown;
-	ray->isRay_facingRight = ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI;
-	ray->isRay_facingLeft = !ray->isRay_facingRight;
+	ray->washit_vertical = FALSE;
+	ray->isray_facingdown = ray->ray_angle > 0 && ray->ray_angle < M_PI;
+	ray->isray_facingup = !ray->isray_facingdown;
+	ray->isray_facingright = ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI;
+	ray->isray_facingleft = !ray->isray_facingright;
 }
 
 void	draw_ray(t_cub *cub)
@@ -31,7 +31,7 @@ void	draw_ray(t_cub *cub)
 	int		i;
 
 	i = 0;
-	angle = cub->player.rotationAngle - (RAY_RANGE / 2.0);
+	angle = cub->player.rotation_angle - (RAY_RANGE / 2.0);
 	while (i < cub->map.ray_count)
 	{
 		draw_one_ray(cub, angle, i);
