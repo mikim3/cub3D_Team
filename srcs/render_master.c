@@ -15,10 +15,8 @@
 int	ft_loop(t_cub *cub)
 {
 	fill_3d_color(cub);
-	// 2D 맵 그리기
 	render_2d_map(cub);
 	render_player(cub);
-	//미니맵에 광선그리는 겸 3D 맵도 그려주기
 	draw_ray(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.ptr, 0, 0);
 	return (0);
@@ -54,9 +52,9 @@ void	player_init(t_player *player, double x, double y, char direction)
 		player->rotation_angle = M_PI * 1.5;
 	else if (direction == 'E')
 		player->rotation_angle = 0;
-	else if (direction == 'W') //왼쪽
+	else if (direction == 'W')
 		player->rotation_angle = M_PI;
-	else //아래
+	else
 		player->rotation_angle = M_PI * 0.5;
 	player->walk_speed = WALKSPEED;
 	player->turn_speed = TURNSPEED;

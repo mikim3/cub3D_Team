@@ -19,9 +19,10 @@ void	ray_init(t_ray *ray, double rayAngle)
 	ray->wall_hity = 0;
 	ray->distance = 0;
 	ray->washit_vertical = FALSE;
-	ray->isray_facingdown = ray->ray_angle > 0 && ray->ray_angle < M_PI;
+	ray->isray_facingdown = ((ray->ray_angle > 0) && (ray->ray_angle < M_PI));
 	ray->isray_facingup = !ray->isray_facingdown;
-	ray->isray_facingright = ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI;
+	ray->isray_facingright = ((ray->ray_angle < 0.5 * M_PI) \
+		|| (ray->ray_angle > 1.5 * M_PI));
 	ray->isray_facingleft = !ray->isray_facingright;
 }
 
@@ -42,14 +43,13 @@ void	draw_ray(t_cub *cub)
 
 void	draw_line(t_cub *cub, double dx, double dy)
 {
-	double	ray_x;
-	double	ray_y;
-	int		x;
-	int		y;
-	double	max_value;
+	t_d_point	ray;
+	t_point		ray_i;
+	t_point		p;
+	double		max_value;
 
-	ray_x = cub->player.x;
-	ray_y = cub->player.y;
+	ray.x = cub->player.x;
+	ray.y = cub->player.y;
 	max_value = fmax(fabs(dx), fabs(dy));
 	if (max_value == 0)
 		return ;
@@ -57,15 +57,14 @@ void	draw_line(t_cub *cub, double dx, double dy)
 	dy /= max_value;
 	while (1)
 	{
-		if (!is_wall(&(cub->map), ray_x, ray_y))
-		{
-			setting_map_location(&(cub->map), &x, &y, ray_x, ray_y);
-			cub->img.data[cub->map.window_width * y + x] = RAY_COLOR;
-		}
-		else
+		ray_i.x = ray.x;
+		ray_i.y = ray.y;
+		if (is_wall(&(cub->map), ray.x, ray.y))
 			break ;
-		ray_x += dx;
-		ray_y += dy;
+		setting_map_location(&(cub->map), &p.x, &p.y, ray_i);
+		cub->img.data[cub->map.window_width * p.y + p.x] = RAY_COLOR;
+		ray.x += dx;
+		ray.y += dy;
 	}
 }
 
@@ -91,7 +90,7 @@ void	draw_one_ray(t_cub *cub, double angle, int i)
 		cub->ray.distance = horz.distance;
 		cub->ray.washit_vertical = FALSE;
 	}
-	draw_line(cub, cub->ray.wall_hitx - cub->player.x,\
+	draw_line(cub, cub->ray.wall_hitx - cub->player.x, \
 	cub->ray.wall_hity - cub->player.y);
 	render_3d_project_walls(cub, i);
 }

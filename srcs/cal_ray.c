@@ -69,7 +69,7 @@ void	cal_vert_ray(t_cub *cub, t_dpable_ray *vert)
 	vert->found_wallhit = FALSE;
 	vert->wall_hitx = 0;
 	vert->wall_hity = 0;
-	vert->xintercept = floor(cub->player.x  / TILE_SIZE) * TILE_SIZE;
+	vert->xintercept = floor(cub->player.x / TILE_SIZE) * TILE_SIZE;
 	vert->xintercept += three_operator(cub->ray.isray_facingright, \
 		TILE_SIZE, 0);
 	vert->yintercept = cub->player.y + \

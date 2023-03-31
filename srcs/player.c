@@ -14,12 +14,15 @@
 
 int	draw_player(t_cub *cub, t_player *player, t_img *img)
 {
-	int	x;
-	int	y;
-	int	row;
-	int	col;
+	int		x;
+	int		y;
+	int		row;
+	int		col;
+	t_point	p;
 
-	setting_map_location(&(cub->map), &x, &y, player->x, player->y);
+	p.x = player->x;
+	p.y = player->y;
+	setting_map_location(&(cub->map), &x, &y, p);
 	update_player(cub);
 	row = -(player->thickness) / 2;
 	while (row <= player->thickness / 2)
@@ -96,4 +99,3 @@ int	update_player(t_cub *cub)
 	}
 	return (0);
 }
-

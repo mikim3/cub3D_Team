@@ -21,8 +21,8 @@
 # define RIGHTDOWN_MAP	4
 
 // map.c
-void	setting_map_location(t_map *map, int *x, int *y, int x2, int y2);
-void	fill_squares(t_img *img, t_map *map, int x, int y, int color);
+void	setting_map_location(t_map *map, int *x, int *y, t_point p2);
+void	fill_squares(t_img *img, t_map *map, t_point p, int color);
 void	render_2d_map(t_cub *cub);
 int		is_wall(t_map *map, double x, double y);
 int		check_edge(t_cub *cub, double x1, double x2, t_d_point new_point);

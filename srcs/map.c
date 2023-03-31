@@ -12,47 +12,47 @@
 
 #include "cub3D.h"
 
-void	setting_map_location(t_map *map, int *x, int *y, int x2, int y2)
+void	setting_map_location(t_map *map, int *x, int *y, t_point p2)
 {
 	if (MAP_LOCATION == LEFTUP_MAP)
 	{
-		*x = (int)(MINIMAP_SCALE * x2);
-		*y = (int)(MINIMAP_SCALE * y2);
+		*x = (int)(MINIMAP_SCALE * p2.x);
+		*y = (int)(MINIMAP_SCALE * p2.y);
 	}
 	else if (MAP_LOCATION == LEFTDOWN_MAP)
 	{
-		*x = (int)(MINIMAP_SCALE * x2);
+		*x = (int)(MINIMAP_SCALE * p2.x);
 		*y = (int)((1 - MINIMAP_SCALE) * TILE_SIZE \
-			* map->map_rows + MINIMAP_SCALE * y2);
+			* map->map_rows + MINIMAP_SCALE * p2.y);
 	}
 	else if (MAP_LOCATION == RIGHTUP_MAP)
 	{
 		*x = (int)((1 - MINIMAP_SCALE) * TILE_SIZE \
-			* map->map_cols + MINIMAP_SCALE * x2);
-		*y = (int)(MINIMAP_SCALE * y2);
+			* map->map_cols + MINIMAP_SCALE * p2.x);
+		*y = (int)(MINIMAP_SCALE * p2.y);
 	}
 	else if (MAP_LOCATION == RIGHTDOWN_MAP)
 	{
 		*x = (int)((1 - MINIMAP_SCALE) * TILE_SIZE * \
-			map->map_cols + MINIMAP_SCALE * x2);
+			map->map_cols + MINIMAP_SCALE * p2.x);
 		*y = (int)((1 - MINIMAP_SCALE) * TILE_SIZE * \
-			map->map_rows + MINIMAP_SCALE * y2);
+			map->map_rows + MINIMAP_SCALE * p2.y);
 	}
 }
 
-void	fill_squares(t_img *img, t_map *map, int x, int y, int color)
+void	fill_squares(t_img *img, t_map *map, t_point p, int color)
 {
 	int	i;
 	int	j;
 
-	setting_map_location(map, &x, &y, x, y);
+	setting_map_location(map, &p.x, &p.y, p);
 	j = 0;
 	while (j < (int)(MINIMAP_SCALE * TILE_SIZE))
 	{
 		i = 0;
 		while (i < (int)(MINIMAP_SCALE * TILE_SIZE))
 		{
-			img->data[(int)(map->window_width) * (y + j) + (x + i)] = color;
+			img->data[(int)(map->window_width) * (p.y + j) + (p.x + i)] = color;
 			i++;
 		}
 		j++;
@@ -61,8 +61,9 @@ void	fill_squares(t_img *img, t_map *map, int x, int y, int color)
 
 void	render_2d_map(t_cub *cub)
 {
-	int	col;
-	int	row;
+	int		col;
+	int		row;
+	t_point	p;
 
 	row = 0;
 	while (row < cub->map.map_rows)
@@ -70,12 +71,12 @@ void	render_2d_map(t_cub *cub)
 		col = 0;
 		while (col < cub->map.map_cols)
 		{
+			p.x = TILE_SIZE * col;
+			p.y = TILE_SIZE * row;
 			if (cub->map.map_matrix[row][col] == 1)
-				fill_squares(&cub->img, &cub->map, (int)(TILE_SIZE * col), \
-				(int)(TILE_SIZE * row), TILE_2D_COLOR);
+				fill_squares(&cub->img, &cub->map, p, TILE_2D_COLOR);
 			else if (cub->map.map_matrix[row][col] == 0)
-				fill_squares(&cub->img, &cub->map, (int)(TILE_SIZE * col), \
-				(int)(TILE_SIZE * row), WALL_2D_COLOR);
+				fill_squares(&cub->img, &cub->map, p, WALL_2D_COLOR);
 			col++;
 		}
 		row++;
@@ -115,12 +116,16 @@ int	check_edge(t_cub *cub, double x1, double y1, t_d_point new_p)
 	p2.x = (int)(x1 / TILE_SIZE);
 	p2.y = (int)(new_p.x / TILE_SIZE);
 	if (p1.x == 1 && p1.y == 1)
-		return (ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]) == NULL);
+		return (!ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) \
+			&& !ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]));
 	if (p1.x == 1 && p1.y == -1)
-		return (ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]) == NULL);
+		return (!ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) \
+			&& !ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]));
 	if (p1.x == -1 && p1.y == 1)
-		return (ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]) == NULL);
+		return (!ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) \
+			&& !ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]));
 	if (p1.x == -1 && p1.y == -1)
-		return (ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]) == NULL);
+		return (!ft_strchr("0NSEW", cub->map.map_matrix[p2.y - p1.y][p2.x]) \
+			&& !ft_strchr("0NSEW", cub->map.map_matrix[p2.y][p2.x - p1.x]));
 	return (FALSE);
 }
