@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 21:16:23 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 14:26:19 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 void	init_info(t_cub *cub, t_3d_info *info)
 {
 	info->correct_distance = cub->ray.distance \
-		* cos(cub->ray.ray_angle - cub->player.rotationAngle);
+		* cos(cub->ray.ray_angle - cub->player.rotation_angle);
 	info->distance_project_plane = \
 		(cub->map.window_width / 2) / tan(FOV_ANGLE / 2);
 	info->projected_wall_height = \
 		(TILE_SIZE / info->correct_distance) * info->distance_project_plane;
-	info->wallStripHeight = (int)info->projected_wall_height;
-	info->wall_top = (cub->map.window_height / 2) - (info->wallStripHeight / 2);
+	info->wall_strip_height = (int)info->projected_wall_height;
+	info->wall_top = (cub->map.window_height / 2) - (info->wall_strip_height / 2);
 	info->correct_wall_top = info->wall_top;
 	info->wall_bottom = (cub->map.window_height / 2) \
-		+ (info->wallStripHeight / 2);
+		+ (info->wall_strip_height / 2);
 	info->correct_wall_bottom = info->wall_bottom;
-	if (info->wallStripHeight >= cub->map.window_height)
+	if (info->wall_strip_height >= cub->map.window_height)
 	{
 		info->correct_wall_top = 0;
 		info->correct_wall_bottom = cub->map.window_height - 1;
@@ -36,12 +36,12 @@ void	init_info(t_cub *cub, t_3d_info *info)
 
 void	check_wall_direction(t_cub *cub, t_3d_info *info)
 {
-	if (cub->ray.wasHit_vertical == TRUE && \
-		(cub->player.x - cub->ray.wall_hitX) > 0)
+	if (cub->ray.washit_vertical == TRUE && \
+		(cub->player.x - cub->ray.wall_hitx) > 0)
 		info->direction = WE;
-	else if (cub->ray.wasHit_vertical == TRUE)
+	else if (cub->ray.washit_vertical == TRUE)
 		info->direction = EA;
-	else if ((cub->player.y - cub->ray.wall_hitY) > 0)
+	else if ((cub->player.y - cub->ray.wall_hity) > 0)
 		info->direction = NO;
 	else
 		info->direction = SO;
@@ -53,11 +53,11 @@ int	select_color(t_cub *cub, t_3d_info *info, int idx)
 	int	c;
 
 	if (info->direction == WE || info->direction == EA)
-		c = (int)cub->ray.wall_hitY;
+		c = (int)cub->ray.wall_hity;
 	else
-		c = (int)cub->ray.wall_hitX;
+		c = (int)cub->ray.wall_hitx;
 	c = (c % TILE_SIZE) * cub->texture[info->direction].width / TILE_SIZE;
-	r = (idx) * cub->texture[info->direction].height / info->wallStripHeight;
+	r = (idx) * cub->texture[info->direction].height / info->wall_strip_height;
 	return (cub->texture[info->direction].img.data \
 		[r * cub->texture[info->direction].width + c]);
 }

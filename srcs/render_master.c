@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:25:57 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 14:22:00 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ void	player_init(t_player *player, double x, double y, char direction)
 	player->thickness = PLAYER_THICKNESS;
 	// 0도가 오른쪽 90도면 아래
 	if (direction == 'N') //위
-		player->rotationAngle = M_PI * 1.5;
+		player->rotation_angle = M_PI * 1.5;
 	else if (direction == 'E') //오른쪽
-		player->rotationAngle = 0;
+		player->rotation_angle = 0;
 	else if (direction == 'W') //왼쪽
-		player->rotationAngle = M_PI;
+		player->rotation_angle = M_PI;
 	else //아래
-		player->rotationAngle = M_PI * 0.5;
-	player->walkSpeed = WALKSPEED;
-	player->turnSpeed = TURNSPEED;
+		player->rotation_angle = M_PI * 0.5;
+	player->walk_speed = WALKSPEED;
+	player->turn_speed = TURNSPEED;
 }
 
 void	render_master(t_cub *cub)
