@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 20:12:44 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 15:06:24 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	player_init(t_player *player, double x, double y, char direction);
 
 //render_master.c
 int		ft_loop(t_cub *cub);
-void	fill_3D_color(t_cub *cub);
+void	fill_3d_color(t_cub *cub);
 void	render_player(t_cub *cub);
 void	render_master(t_cub *cub);
 
