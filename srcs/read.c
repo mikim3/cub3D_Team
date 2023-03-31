@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 20:42:03 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/27 20:42:05 by soylee           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	read_file(t_god *god, char *filename)
+void	read_file(t_cub *cub, char *filename)
 {
 	int	fd;
 
@@ -21,12 +21,12 @@ void	read_file(t_god *god, char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		exit_error("Fail to open file.");
-	read_info(god, fd);
-	read_map(god, fd);
+	read_info(cub, fd);
+	read_map(cub, fd);
 	close(fd);
 }
 
-void	read_info(t_god *god, int fd)
+void	read_info(t_cub *cub, int fd)
 {
 	char	*line;
 	int		cnt;
@@ -43,14 +43,14 @@ void	read_info(t_god *god, int fd)
 			nl = ft_strrchr(line, '\n');
 			if (nl)
 				*nl = 0;
-			check_type(god, line);
+			check_type(cub, line);
 			cnt++;
 		}
 		free(line);
 	}
 }
 
-void	read_map(t_god *god, int fd)
+void	read_map(t_cub *cub, int fd)
 {
 	char	**str_map;
 	char	*line;
@@ -60,9 +60,9 @@ void	read_map(t_god *god, int fd)
 	if (!str_map)
 		exit_error("Fail to split map.");
 	free(line);
-	check_valid_char(god, str_map);
-	parse_map(god, str_map);
-	check_around_wall(&god->map);
+	check_valid_char(cub, str_map);
+	parse_map(cub, str_map);
+	check_around_wall(&cub->map);
 	ft_free(str_map);
 }
 
@@ -95,7 +95,7 @@ char	*get_line_map(int fd)
 	return (line);
 }
 
-void	check_type(t_god *god, char *line)
+void	check_type(t_cub *cub, char *line)
 {
 	static char	*type[6] = {"NO ", "SO ", "WE ", "EA ", "F ", "C "};
 	static int	checked[6];
@@ -113,9 +113,9 @@ void	check_type(t_god *god, char *line)
 			if (checked[i])
 				exit_error("Duplicated type");
 			if (ft_strlen(type[i]) == 3)
-				parse_texture(god, line + 3, i);
+				parse_texture(cub, line + 3, i);
 			else
-				parse_color(god, line + 2, i);
+				parse_color(cub, line + 2, i);
 			checked[i] = 1;
 			return ;
 		}

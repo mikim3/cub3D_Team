@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:02:22 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/27 10:33:14 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_texture
 	int		height;
 	t_img	img;
 }	t_texture;
-typedef struct s_god {
+typedef struct s_cub {
 	t_player player;
 	t_img	img;
 	t_key	key;
@@ -101,7 +101,7 @@ typedef struct s_god {
 	t_texture	texture[6];
 	void	*mlx;
 	void	*win;
-} t_god;
+} t_cub;
 
 typedef struct s_3d_info
 {

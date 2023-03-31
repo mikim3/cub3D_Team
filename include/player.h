@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 20:12:37 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/27 20:12:38 by soylee           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "struct.h"
 
 //player.c
-int	draw_player(t_god *god, t_player *player, t_img *img);
-int	update_player(t_god *god);
+int	draw_player(t_cub *cub, t_player *player, t_img *img);
+int	update_player(t_cub *cub);
 
 #endif

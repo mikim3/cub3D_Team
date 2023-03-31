@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:26:31 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/30 19:26:34 by soylee           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,19 @@ int	get_color(char **str_num)
 	return (color);
 }
 
-void	fill_map(t_god *god, char *line_map, int i)
+void	fill_map(t_cub *cub, char *line_map, int i)
 {
 	int	j;
 	int	len;
 
 	j = 0;
 	len = ft_strlen(line_map);
-	while (j < god->map.map_cols)
+	while (j < cub->map.map_cols)
 	{
 		if (j >= len || line_map[j] == ' ')
-			god->map.map_matrix[i][j] = -1;
+			cub->map.map_matrix[i][j] = -1;
 		else if (line_map[j] == '1')
-			god->map.map_matrix[i][j] = 1;
+			cub->map.map_matrix[i][j] = 1;
 		j++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 20:55:04 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/30 20:12:58 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:32:18 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@
 # define KEY_UP 	(126)
 # define KEY_DOWN	(125)
 
-//key.c
+// key.c
 void	key_init(t_key *key);
 int		key_press(int keycode, t_key *key);
 int		key_release(int keycode, t_key *key);
 int		key_exit(void);
-
 
 #endif

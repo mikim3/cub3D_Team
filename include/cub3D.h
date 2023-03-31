@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:39:06 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/30 20:27:59 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:32:10 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@
 # include "render.h"
 # include "utils.h"
 
-#define TILE_SIZE 40
-
-/* math */
-# define FOV_ANGLE (60 * (M_PI / 180.0))
-# define	RAY_RANGE (FOV_ANGLE) // 내가 보고 있다는걸 몇도로 나타낼까 시야각
+# define TILE_SIZE			40
+// # define FOV_ANGLE			(60 * (M_PI / 180.0))
+# define FOV_ANGLE			(1.047197551)
+# define RAY_RANGE          (FOV_ANGLE)
 
 # define TRUE				1
 # define FALSE				0
@@ -45,7 +44,8 @@
 # define MAP_LOCATION (RIGHTDOWN_MAP)
 # define PLAYER_THICKNESS	6
 # define WALKSPEED			1
-# define TURNSPEED			(1.5 * (M_PI / 180))
+// # define TURNSPEED			(1.5 * (M_PI / 180))
+# define TURNSPEED			0.0261799387799
 # define WALL_STRIP_WIDTH	1
 # define IS_3D_AREA			0x663333
 # define PLAYER_2D_COLOR	0x00AAAA

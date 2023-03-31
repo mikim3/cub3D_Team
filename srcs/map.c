@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:23:58 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/30 20:29:12 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,21 @@ void fill_squares(t_img *img, t_map *map, int x, int y, int color)
 }
 
 // 2D맵그리기
-void	render_map(t_god *god)
+void	render_map(t_cub *cub)
 {
 	int col;
 	int row;
 
 	row = 0;
-	while (row < god->map.map_rows)
+	while (row < cub->map.map_rows)
 	{
 		col = 0;
-		while (col < god->map.map_cols)
+		while (col < cub->map.map_cols)
 		{
-			if (god->map.map_matrix[row][col] == 1)
-				fill_squares(&god->img, &god->map, (int)(TILE_SIZE * col), (int)(TILE_SIZE * row), TILE_2D_COLOR);
-			else if (god->map.map_matrix[row][col] == 0)
-				fill_squares(&god->img, &god->map, (int)(TILE_SIZE * col), (int)(TILE_SIZE * row), WALL_2D_COLOR);
+			if (cub->map.map_matrix[row][col] == 1)
+				fill_squares(&cub->img, &cub->map, (int)(TILE_SIZE * col), (int)(TILE_SIZE * row), TILE_2D_COLOR);
+			else if (cub->map.map_matrix[row][col] == 0)
+				fill_squares(&cub->img, &cub->map, (int)(TILE_SIZE * col), (int)(TILE_SIZE * row), WALL_2D_COLOR);
 			col++;
 		}
 		row++;
@@ -107,7 +107,7 @@ int	is_wall(t_map *map, double x, double y)
 // 0 1
 // 플레이어가 작고 이렇게 있을때 벽통과 버그를 막기위한 코드
 // x1,y1은 플레이어 원래 위치   x2,y2는 플레이어 옮긴위치
-int check_edge(t_god *god, double x1, double x2, double y1, double y2)
+int check_edge(t_cub *cub, double x1, double x2, double y1, double y2)
 {
 	int dx;
 	int dy;
@@ -121,33 +121,33 @@ int check_edge(t_god *god, double x1, double x2, double y1, double y2)
 	// 다음 좌표를 어디로 갈지를 dx,dy로 구하고? 그 위치에 있는걸
 	// 0NSEW 즉 벽이 아니면
 	if (dx == 1 && dy == 1)
-		return (ft_strchr("0NSEW", god->map.map_matrix[dy2 - dy][dx2]) == NULL) && (ft_strchr("0NSEW", god->map.map_matrix[dy2][dx2 - dx]) == NULL);
+		return (ft_strchr("0NSEW", cub->map.map_matrix[dy2 - dy][dx2]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[dy2][dx2 - dx]) == NULL);
 	if (dx == 1 && dy == -1)
-		return (ft_strchr("0NSEW", god->map.map_matrix[dy2 - dy][dx2]) == NULL) && (ft_strchr("0NSEW", god->map.map_matrix[dy2][dx2 - dx]) == NULL);
+		return (ft_strchr("0NSEW", cub->map.map_matrix[dy2 - dy][dx2]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[dy2][dx2 - dx]) == NULL);
 	if (dx == -1 && dy == 1)
-		return (ft_strchr("0NSEW", god->map.map_matrix[dy2 - dy][dx2]) == NULL) && (ft_strchr("0NSEW", god->map.map_matrix[dy2][dx2 - dx]) == NULL);
+		return (ft_strchr("0NSEW", cub->map.map_matrix[dy2 - dy][dx2]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[dy2][dx2 - dx]) == NULL);
 	if (dx == -1 && dy == -1)
-		return (ft_strchr("0NSEW", god->map.map_matrix[dy2 - dy][dx2]) == NULL) && (ft_strchr("0NSEW", god->map.map_matrix[dy2][dx2 - dx]) == NULL);
+		return (ft_strchr("0NSEW", cub->map.map_matrix[dy2 - dy][dx2]) == NULL) && (ft_strchr("0NSEW", cub->map.map_matrix[dy2][dx2 - dx]) == NULL);
 	return (FALSE);
 }
 
-int draw_sky(t_god *god, int ray_num, int wall_top_pixel)
+int draw_sky(t_cub *cub, int ray_num, int wall_top_pixel)
 {
 	// y가 벽의 탑보다 높으면 그린다.
 	for (int y = 0; y < wall_top_pixel; y++)
 		for (int x = 0; x < WALL_STRIP_WIDTH; x++)
-			if (god->img.data[god->map.window_width * y + \
+			if (cub->img.data[cub->map.window_width * y + \
 				(x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
-				god->img.data[god->map.window_width * y + \
-				(x + ray_num * WALL_STRIP_WIDTH)] = god->map.sky_color;
+				cub->img.data[cub->map.window_width * y + \
+				(x + ray_num * WALL_STRIP_WIDTH)] = cub->map.sky_color;
 	return (0);
 }
 
-int draw_floor(t_god *god, int ray_num, int wall_bottom_pixel)
+int draw_floor(t_cub *cub, int ray_num, int wall_bottom_pixel)
 {
-	for (int y = wall_bottom_pixel; y < god->map.window_height; y++)
+	for (int y = wall_bottom_pixel; y < cub->map.window_height; y++)
 		for (int x = 0; x < WALL_STRIP_WIDTH; x++)
-			if (god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
-				god->img.data[god->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = god->map.floor_color;
+			if (cub->img.data[cub->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] == IS_3D_AREA)
+				cub->img.data[cub->map.window_width * y + (x + ray_num * WALL_STRIP_WIDTH)] = cub->map.floor_color;
 	return (0);
 }

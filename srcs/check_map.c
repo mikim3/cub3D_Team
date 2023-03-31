@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soylee <soylee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 16:22:28 by soylee            #+#    #+#             */
-/*   Updated: 2023/03/12 16:22:40 by soylee           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:34:31 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	check_valid_char(t_god *god, char **str)
+void	check_valid_char(t_cub *cub, char **str)
 {
 	int		i;
 	int		tag;
@@ -21,14 +21,14 @@ void	check_valid_char(t_god *god, char **str)
 	i = 0;
 	while (str[i])
 	{
-		check_valid_line(god, str[i], i, &tag);
+		check_valid_line(cub, str[i], i, &tag);
 		i++;
 	}
 	if (!tag)
 		exit_error("There is no Start Point");
 }
 
-void	check_valid_line(t_god *god, char *line, int i, int	*tag)
+void	check_valid_line(t_cub *cub, char *line, int i, int	*tag)
 {
 	int		j;
 	char	tmp;
@@ -43,7 +43,7 @@ void	check_valid_line(t_god *god, char *line, int i, int	*tag)
 		{
 			if (*tag == 1)
 				exit_error("Need 1 Start Point!");
-			player_init(&god->player, j, i, tmp);
+			player_init(&cub->player, j, i, tmp);
 			*tag = 1;
 		}
 		else
