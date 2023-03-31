@@ -6,7 +6,7 @@
 /*   By: mikim3 <mikim3@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:39:06 by mikim3            #+#    #+#             */
-/*   Updated: 2023/03/31 13:32:10 by mikim3           ###   ########.fr       */
+/*   Updated: 2023/03/31 15:23:57 by mikim3           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@
 # include "utils.h"
 
 # define TILE_SIZE			40
-// # define FOV_ANGLE			(60 * (M_PI / 180.0))
-# define FOV_ANGLE			(1.047197551)
-# define RAY_RANGE          (FOV_ANGLE)
+// # define RAY_RANGE			(60 * (M_PI / 180.0))
+# define RAY_RANGE          1.047197551
 
 # define TRUE				1
 # define FALSE				0
